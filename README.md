@@ -1,3 +1,4 @@
+
 ## How to Run Python3 File In VS Code
 
 ### Select Workspace Interpreter
@@ -6,13 +7,6 @@
 * RIGNT CLICK: Run Python File In Ternimal
 
 
-```sh
->>> help()
+#### global vs. nonlocal
 
-help> keywords
-help> quit
-
->>> help("keywords")
->>> help("modules")
-
-```
+> python 2.x 不支持 nonlocal
