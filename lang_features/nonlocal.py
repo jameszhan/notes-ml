@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# python 2.x 不支持 nonlocal
 
 
 def counter(init):
