@@ -1,1 +1,5 @@
 snippets/
+*.pyc
+*.zip
+*.tar.gz
+
