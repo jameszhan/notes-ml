@@ -73,11 +73,11 @@ for k in range(90):
 
 antiSpam.show()
 
-print antiSpam.prob(['discount', 'spam', 'todo'])
-print antiSpam.safe_prob(['discount', 'spam', 'todo'])
+print 'P(discount,spam,todo)={0}'.format(antiSpam.prob(['discount', 'spam', 'todo']))
+print 'P(discount,spam,todo)={0}'.format(antiSpam.safe_prob(['discount', 'spam', 'todo']))
 
-print antiSpam.prob(['hello', 'mail', 'todo'])
-print antiSpam.safe_prob(['hello', 'mail', 'todo'])
+print 'P(hello,mail,todo)={0}'.format(antiSpam.prob(['hello', 'mail', 'todo']))
+print 'P(hello,mail,todo)={0}'.format(antiSpam.safe_prob(['hello', 'mail', 'todo']))
 
-print antiSpam.prob(['invoice', 'discount', 'bill'])
-print antiSpam.safe_prob(['invoice', 'discount', 'bill'])
+print 'P(invoice,discount,bill)={0}'.format(antiSpam.prob(['invoice', 'discount', 'bill']))
+print 'P(invoice,discount,bill)={0}'.format(antiSpam.safe_prob(['invoice', 'discount', 'bill']))
