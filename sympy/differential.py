@@ -25,4 +25,9 @@ print 'partial(θ1) = {0}'.format(sp.diff(sse, theta1))
 print 'partial(θ2) = {0}'.format(sp.diff(sse, theta2))
 
 
+p, n, k = sp.symbols('p n k')
+likelihood = p ** k * (1 - p) ** (n - k)
+print sp.diff(likelihood, p).simplify()
+
+
 
