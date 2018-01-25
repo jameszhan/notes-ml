@@ -39,14 +39,14 @@ a2, b2 = gd(X, Y, 0.05, 1e-8)
 a3, b3 = gd(X, Y, 0.05, 1e-32)
 
 
-print 'y = {0} * x + {1}'.format(a1, b1)
-print 'y = {0} * x + {1}'.format(a2, b2)
-print 'y = {0} * x + {1}'.format(a3, b3)
+print('y = {0} * x + {1}'.format(a1, b1))
+print('y = {0} * x + {1}'.format(a2, b2))
+print('y = {0} * x + {1}'.format(a3, b3))
 
 A = np.vstack([X, np.ones(len(X))]).T
 a, b = np.linalg.lstsq(A, Y)[0]
 
-print 'y = {0} * x + {1}'.format(a, b)
+print('y = {0} * x + {1}'.format(a, b))
 
 
 x = np.array(X)

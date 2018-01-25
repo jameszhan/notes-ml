@@ -21,7 +21,7 @@ X = mu + sigma * np.random.randn(10000)
 # the histogram of the data
 n, bins, patches = plt.hist(X, 50, normed=1, facecolor='y', alpha=0.75)
 
-print 'n = {0}, \nbins = {1}, \npatches = {2}'.format(n, bins, patches)
+print('n = {0}, \nbins = {1}, \npatches = {2}'.format(n, bins, patches))
 
 plt.grid(True)
 plt.show()

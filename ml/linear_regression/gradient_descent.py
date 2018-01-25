@@ -19,7 +19,7 @@ def bgd(X, Y, alpha=0.01, epsilon=1e-8, trace=True):
             sse2 = sse
 
         if trace:
-            print "[ Epoch {0} ] theta = {1}, loss = {2}, error = {3})".format(cnt, theta, loss, sse)
+            print("[ Epoch {0} ] theta = {1}, loss = {2}, error = {3})".format(cnt, theta, loss, sse))
 
         gradient = np.dot(Xt, loss) / m
         theta -= alpha * gradient
@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
     b, a = bgd(X, Y, 0.05, 1e-6)
 
-    print 'y = {0} * x + {1}'.format(a, b)
+    print('y = {0} * x + {1}'.format(a, b))
 
     x = np.array(X)
     plt.plot(x, Y, 'o', label='Original data', markersize=5)
@@ -46,6 +46,6 @@ if __name__ == '__main__':
     y = [95.364, 97.217205, 75.195834, 60.105519, 49.342380]
 
     _theta = bgd(x, y, 0.1, 1e-8)
-    print 'theta = {0}'.format(_theta)
+    print('theta = {0}'.format(_theta))
 
 
