@@ -35,7 +35,7 @@ def subgraph(sigma1, sigma2, index, count=100):
 
     clf.fit(xy_normalized, labels)
 
-    nearests = clf.kneighbors([(50 / x_diff, 5 / y_diff), (30 / x_diff, 3 / y_diff)], 5, False)
+    # nearests = clf.kneighbors([(50 / x_diff, 5 / y_diff), (30 / x_diff, 3 / y_diff)], 5, False)
 
     xx,yy = np.meshgrid(np.arange(1, 70.1, 0.1), np.arange(1, 7.01, 0.01))
     xx_normalized = xx / x_diff
