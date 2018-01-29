@@ -14,7 +14,7 @@ def load_data(file):
             if i == 0:
                 # print("title: {0}".format(line))
                 pass
-            elif i < 39000:
+            elif i < 40000:
                 train_data.append(line[1:-1])
                 train_label.append(line[0])
             else:

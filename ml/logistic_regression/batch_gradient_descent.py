@@ -18,7 +18,7 @@ def bgd(rows, labels, hypothesis, cost, alpha=0.01, epsilon=1e-6, trace=True):
             j += cost(_X[k], theta, labels[k])
         j = j / m
         if trace:
-            print "[ Epoch {0} ] theta = {1}, loss = {2}, error = {3})".format(cnt, theta, loss, j)
+            print("[ Epoch {0} ] theta = {1}, loss = {2}, error = {3})".format(cnt, theta, loss, j))
 
         if abs(j - j1) < epsilon:
             break

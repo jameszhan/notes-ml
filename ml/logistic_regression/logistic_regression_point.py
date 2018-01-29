@@ -18,7 +18,7 @@ def cost(x, theta, y):
 def predict2d(theta, x, y):
     data = [1, x, y]
     v = h(theta, data)
-    print 'predict ({0}, {1}) = {2}, z = {3}'.format(x, y, v, np.dot(theta, data))
+    print('predict ({0}, {1}) = {2}, z = {3}'.format(x, y, v, np.dot(theta, data)))
     return v
 
 
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     x2 = np.linspace(0, 6, m + 1)
     X, Y = [], []
 
-    print x1
+    print(x1)
     for i in range(m):
         for j in range(m):
             X.append((x1[i], x2[j]))
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     plt.show()
 
     theta2 = bgd(X, Y, h, cost, 0.5)
-    print 'theta = {0}'.format(theta2)
+    print('theta = {0}'.format(theta2))
 
     predict2d(theta2, 10, 10)
     predict2d(theta2, 10, 1)

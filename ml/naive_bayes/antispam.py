@@ -22,7 +22,7 @@ class AntiSpam:
         self.incm(category)
 
     def show(self):
-        print "mc: %s \nwc:%s\n\n\n" % (self.mc, self.wc)
+        print("mc: %s \nwc:%s\n\n\n" % (self.mc, self.wc))
 
     def wcount(self, word, category):
         if word in self.wc and category in self.wc[word]:
@@ -73,11 +73,11 @@ for k in range(90):
 
 antiSpam.show()
 
-print 'P(discount,spam,todo)={0}'.format(antiSpam.prob(['discount', 'spam', 'todo']))
-print 'P(discount,spam,todo)={0}'.format(antiSpam.safe_prob(['discount', 'spam', 'todo']))
+print('P(discount,spam,todo)={0}'.format(antiSpam.prob(['discount', 'spam', 'todo'])))
+print('P(discount,spam,todo)={0}'.format(antiSpam.safe_prob(['discount', 'spam', 'todo'])))
 
-print 'P(hello,mail,todo)={0}'.format(antiSpam.prob(['hello', 'mail', 'todo']))
-print 'P(hello,mail,todo)={0}'.format(antiSpam.safe_prob(['hello', 'mail', 'todo']))
+print('P(hello,mail,todo)={0}'.format(antiSpam.prob(['hello', 'mail', 'todo'])))
+print('P(hello,mail,todo)={0}'.format(antiSpam.safe_prob(['hello', 'mail', 'todo'])))
 
-print 'P(invoice,discount,bill)={0}'.format(antiSpam.prob(['invoice', 'discount', 'bill']))
-print 'P(invoice,discount,bill)={0}'.format(antiSpam.safe_prob(['invoice', 'discount', 'bill']))
+print('P(invoice,discount,bill)={0}'.format(antiSpam.prob(['invoice', 'discount', 'bill'])))
+print('P(invoice,discount,bill)={0}'.format(antiSpam.safe_prob(['invoice', 'discount', 'bill'])))

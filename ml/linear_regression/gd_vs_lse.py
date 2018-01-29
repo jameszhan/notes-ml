@@ -40,6 +40,6 @@ def gd(X, Y, alpha=0.01, epsilon=1e-32):
 X = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 Y = np.array([0.199, 0.389, 0.580, 0.783, 0.980, 1.177, 1.380, 1.575, 1.771])
 
-print lse(X, Y)
-print gd(X, Y, 0.05)
-print bgd(X, Y, 0.05, 1e-32, False)
+print(lse(X, Y))
+print(gd(X, Y, 0.05))
+print(bgd(X, Y, 0.05, 1e-32, False))

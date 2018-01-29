@@ -37,7 +37,7 @@ def bgd(X, Y, alpha=0.01, epsilon=1e-6, trace=True):
         j = J(_X, Y, theta)
 
         if trace:
-            print "[ Epoch {0} ] theta = {1}, loss = {2}, error = {3})".format(cnt, theta, loss, j)
+            print("[ Epoch {0} ] theta = {1}, loss = {2}, error = {3})".format(cnt, theta, loss, j))
 
         if abs(j - j1) < epsilon:
             break
@@ -51,7 +51,7 @@ def bgd(X, Y, alpha=0.01, epsilon=1e-6, trace=True):
 def predict2d(theta, x, y):
     data = [1, x, y]
     v = h(theta, data)
-    print 'predict ({0}, {1}) = {2}, z = {3}'.format(x, y, v, np.dot(theta, data))
+    print('predict ({0}, {1}) = {2}, z = {3}'.format(x, y, v, np.dot(theta, data)))
     return v
 
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     x2 = np.linspace(0, 6, m + 1)
     X, Y = [], []
 
-    print x1
+    print(x1)
     for i in range(m):
         for j in range(m):
             X.append((x1[i], x2[j]))
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     plt.show()
 
     theta2 = bgd(X, Y, 0.5)
-    print 'theta = {0}'.format(theta2)
+    print('theta = {0}'.format(theta2))
 
     predict2d(theta2, 10, 10)
     predict2d(theta2, 10, 1)
