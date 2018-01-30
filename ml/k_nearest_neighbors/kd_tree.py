@@ -84,24 +84,39 @@ def _handle_node(heap, k, distance, node):
     if len(heap) < k or distance < largest_distance:
         logger.debug("% heappush {0} to {1}.".format((distance, node), heap))
         heapq.heappush(heap, (distance, node))
+    else:
+        logger.debug("ignore node {0}".format(node.point))
 
 
 def _closest(node, point, best_nodes, k):
+    print("enter {0}".format(node.point))
     dim = node.axis
     own_distance = metric(node.point, point)
-    dims = len(node.point)
-    linear_point = np.zeros(dims)
 
-    for i in range(dims):
-        if i == node.axis:
-            linear_point[i] = point[i]
-        else:
-            linear_point[i] = node.point[i]
-
-    linear_distance = metric(linear_point, node.point)
+    parent_node = node.parent
+    if parent_node:
+        dims = len(parent_node.point)
+        linear_point = np.zeros(dims)
+        for i in range(dims):
+            if i == parent_node.axis:
+                linear_point[i] = point[i]
+            else:
+                linear_point[i] = parent_node.point[i]
+        linear_distance = metric(linear_point, node.point)
+    else:
+        linear_distance = np.inf
+        linear_point = None
 
     if node.is_leaf():
         _handle_node(best_nodes, k, own_distance, node)
+        logger.debug("node: {0}, linear_node = {1}, parent_node = {2}".format(node, linear_point, parent_node))
+        if len(best_nodes) < k or linear_distance < own_distance:
+            if node == parent_node.left_child:
+                other_child = parent_node.right_child
+            else:
+                other_child = parent_node.left_child
+            if other_child:
+                _closest(other_child, point, best_nodes, k)
     else:
         if node.right_child is None:
             best_child = node.left_child
@@ -117,14 +132,16 @@ def _closest(node, point, best_nodes, k):
 
         _handle_node(best_nodes, k, own_distance, node)
 
-        largest_distance, _ = heapq.nlargest(1, best_nodes)[0]
-        if len(best_nodes) < k or linear_distance < largest_distance:
+        logger.debug("node: {0}, linear_node = {1}, parent_node = {2}".format(node, linear_point, parent_node))
+        if len(best_nodes) < k or linear_distance < own_distance:
             if best_child == node.left_child:
                 other_child = node.right_child
             else:
                 other_child = node.left_child
             if other_child:
                 _closest(other_child, point, best_nodes, k)
+
+    print("exit {0}".format(node.point))
 
 
 def closest(root, point, k=1):
@@ -150,7 +167,7 @@ if __name__ == '__main__':
     print("Mid Order:")
     midorder_traversal(tree, lambda x: print(x))
 
-    point = (6.1, 2.5)
+    point = (2.1, 3.1)
 
     figure = plt.figure(figsize=(10, 10))
 
@@ -212,7 +229,7 @@ if __name__ == '__main__':
             ax.add_patch(Circle(point, d, color='m', fill=False, alpha=0.5))
 
 
-    show_closest(3)
+    show_closest(1)
 
     plt.show()
 

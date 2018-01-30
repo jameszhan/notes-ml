@@ -48,5 +48,21 @@ def draw_point(n):
         plt.plot(_x, [n.point[1]] * 10, c=color, label='Splitter', alpha=0.5)
 
 
+def show_closest(point, k, c):
+    closest_points = kd.closest(tree, point, k=k)
+    max_dist = closest_points[-1][0]
+    plt.text(point[0] - 0.3, point[1] - 0.2, "({0}, {1})".format(*point), color='g', alpha=0.8)
+    ax.scatter(*point, c=c, marker='*', s=30, alpha=0.7)
+    print("draw circle with radius {0}".format(max_dist))
+    for d, node in closest_points:
+        print("point = {0}, distance = {1}".format(node, d))
+        ax.add_patch(Circle(point, d, color=c, fill=False, alpha=0.5))
+
+
 kd.preorder_traversal(tree, draw_point)
+# show_closest((2.3, 3.3), 1, 'm')
+# show_closest((2, 4.5), 1, 'y')
+show_closest((7.5, 5), 1, 'y')
+
+
 plt.show()
