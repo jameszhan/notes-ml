@@ -1,0 +1,23 @@
+digraph G {
+    node72 -> node54[label="01"];
+    node54 -> node63[label="02"];
+    node63 -> node63nearer[label="03"];
+    node63nearer -> node63[label="04",style="dashed"];
+    node63 -> axis63[label="05"];
+    node63 -> metric63[label="06"];
+    node63 -> node63further[label="07"];
+    node63further -> node63[label="08",style="dashed"];
+    node63 -> node54[label="09",style="dashed"];
+    node54 -> axis54[label="10"];
+    node54 -> node72[label="11",style="dashed"];
+    node72 -> axis72[label="12"];
+    node72 -> metric72[label="13"];
+    node72 -> node96[label="14"];
+    node96 -> node81[label="15"];
+    node81 -> node81nearer[label="16"];
+    node81nearer -> node81[label="17",style="dashed"];
+    node81 -> axis81[label="18"];
+    node81 -> node96[label="19",style="dashed"];
+    node96 -> axis96[label="20"];
+    node96 -> node72[label="21"];
+}

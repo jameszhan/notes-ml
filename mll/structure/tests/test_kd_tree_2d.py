@@ -52,10 +52,10 @@ def draw_point(n):
 
 
 def show_closest(tree, point, c):
-    dist, node, _, visited_nodes = tree.closest(point)
+    dist, node, count, visited_nodes = tree.closest(point)
     ax.text(point[0] - 0.35, point[1] - 0.25, "({0}, {1})".format(*point), color='g', alpha=0.8)
     ax.scatter(*point, c=c, marker='*', s=30, alpha=0.7)
-    print("draw circle with radius {0}".format(dist))
+    print("draw circle with radius {0} nodes visited is {1}".format(dist, count))
     i = 10
     for d, _ in visited_nodes:
         alpha = 0.1 * i

@@ -72,7 +72,7 @@ class KDTree(object):
             if node is None:
                 return np.inf, node, 0
 
-            node_visited = 0
+            node_visited = 1
 
             axis = node.axis
             if point[axis] < node.point[axis]:
@@ -99,7 +99,6 @@ class KDTree(object):
                     min_dist, target_node = current_dist, node
                 logger.debug("metric {0}".format(node))
                 visited_nodes.append((current_dist, node))
-                node_visited += 1
 
                 further_dist, further_node, further_count = travel(further_node, min_dist)
                 node_visited += further_count
