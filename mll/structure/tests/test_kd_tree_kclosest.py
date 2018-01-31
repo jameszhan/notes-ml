@@ -16,7 +16,7 @@ from kd_tree import KDTree
 logger = logging.getLogger("unittestLogger")
 
 colors = ['r', 'b', 'g', 'y', 'm', 'c', 'k']
-figure = plt.figure(figsize=(10, 10))
+figure = plt.figure(figsize=(12, 8))
 ax = figure.add_subplot(111, aspect=True)
 ax.grid(True)
 figure.subplots_adjust(left=0.05, bottom=0.05, right=0.99, top=0.99, wspace=None, hspace=None)
@@ -53,13 +53,14 @@ def draw_point(n):
 
 def show_closest(tree, point, k, c):
     nodes, count, visited_nodes = tree.kclosest(point, k)
-    ax.text(point[0] - 0.35, point[1] - 0.25, "({0}, {1})".format(*point), color='g', alpha=0.8)
-    ax.scatter(*point, c=c, marker='*', s=30, alpha=0.7)
+    ax.scatter(*point, c=c, marker='*', s=10, alpha=0.7)
+    logger.info("expected {0}, touched {1}, candidates: {2}".format(len(nodes), count, len(visited_nodes)))
     i = 10
-    for d, _ in visited_nodes:
+    for d, _ in nodes:
         alpha = 0.1 * i
         if alpha <= 0:
             alpha = 0.1
+        logger.info("draw circle with radius {0} with point {1}".format(d, point))
         ax.add_patch(Circle(point, d, color=c, fill=False, alpha=alpha))
         i -= 2
 
@@ -72,35 +73,26 @@ class TestKDTree2d(unittest.TestCase):
     #
     #     tree.traversal(draw_point, 'preorder')
     #     show_closest(tree, (2.3, 3.3), 3, 'r')
-    #     # show_closest(self.tree, (2.0, 4.5), 3, 'g')
-    #     # show_closest(self.tree, (7.5, 5.0), 3, 'b')
+    #     show_closest(tree, (2.0, 4.5), 3, 'g')
+    #     show_closest(tree, (7.5, 5.0), 3, 'b')
     #     plt.show()
 
     def test_random(self):
-        count, sigma1, sigma2 = 50, 0.6, 0.5
+        count, sigma1, sigma2 = 10000, 0.6, 0.5
 
         np.random.seed(0)
-        x1 = np.random.normal(5, sigma1, count)
-        y1 = np.random.normal(5, sigma2, count)
+        x = np.random.normal(3, sigma1, count)
+        y = np.random.normal(3, sigma2, count)
 
-        x2 = np.random.normal(3, sigma1, count)
-        y2 = np.random.normal(4, sigma2, count)
-
-        x3 = np.random.normal(4.5, sigma1, count)
-        y3 = np.random.normal(2.5, sigma2, count)
-
-        point = [np.random.normal(5, 0.6), np.random.normal(5, 0.5)]
-
-        ax.scatter(x1, y1, c='b', marker='s', s=10, alpha=0.7)
-        ax.scatter(x2, y2, c='r', marker='^', s=10, alpha=0.7)
-        ax.scatter(x3, y3, c='g', s=10, alpha=0.7)
-
-        ax.scatter(*point, c='m', marker='*', s=100, alpha=1.0)
-
-        points = np.c_[np.r_[x1, x2, x3], np.r_[y1, y2, y3]]
+        point = [3.01, 3.01]
+        for i in range(count):
+            if 2.98 < x[i] < 3.03 and 2.98 < y[i] < 3.03:
+                ax.scatter(x[i], y[i], c='b', marker='s', s=10, alpha=0.7)
+        # ax.scatter(x, y, c='b', marker='s', s=10, alpha=0.7)
+        points = np.c_[x, y]
 
         tree = KDTree(points)
-        show_closest(tree, point, 2, 'm')
+        show_closest(tree, point, 10, 'm')
         plt.show()
 
 
