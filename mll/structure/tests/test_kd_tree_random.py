@@ -7,7 +7,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 
-
 parent_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 sys.path.append(parent_path)
 
@@ -54,8 +53,6 @@ class TestKDTree2d(unittest.TestCase):
         ax.scatter(x1, y1, c='b', marker='s', s=10, alpha=0.7)
         ax.scatter(x2, y2, c='r', marker='^', s=10, alpha=0.7)
         ax.scatter(x3, y3, c='g', s=10, alpha=0.7)
-
-        ax.scatter(*point, c='m', marker='*', s=100, alpha=1.0)
 
         points = np.c_[np.r_[x1, x2, x3], np.r_[y1, y2, y3]]
 

@@ -6,18 +6,6 @@ from sortedcollections import SortedListWithKey
 logger = logging.getLogger("KDTree")
 
 
-class Neg(object):
-    def __init__(self, v):
-        assert v is not None
-        self.v = v
-
-    def __eq__(self, other):
-        return self.v == (other.v)
-
-    def __lt__(self, other):
-        return not self.v < other.v
-
-
 class KDNode(object):
     def __init__(self, axis, point, label=None, left_child=None, right_child=None, parent=None):
         self.axis = axis
@@ -29,14 +17,6 @@ class KDNode(object):
 
     def is_leaf(self):
         return self.left_child is None and self.right_child is None
-
-    def __lt__(self, other):
-        if other is None:
-            return -1
-        elif other == self:
-            return 0
-        else:
-            return 1
 
     def __str__(self):
         return "{0}:{1}".format(self.point, self.axis)
@@ -69,12 +49,13 @@ def _postorder_traversal(node, visit):
     visit(node)
 
 
-def metric(x1, x2):
+def default_get_distince(x1, x2):
     return np.linalg.norm(np.subtract(x1, x2), ord=2)
 
 
 class KDTree(object):
-    def __init__(self, data_list, labels=None):
+    def __init__(self, data_list, labels=None, metric=default_get_distince):
+        self.metric = metric
         self._build(data_list, labels)
 
     def kclosest(self, point, k=1):
@@ -93,6 +74,7 @@ class KDTree(object):
             logger.debug("visit {0}".format(node))
             if node is None:
                 return 0
+
             nodes_visited = 1
 
             axis = node.axis
@@ -108,10 +90,10 @@ class KDTree(object):
             max_dist = current_max()
             axis_dist = np.abs(node.point[axis] - point[axis])
             logger.debug("axis: {0}, distance: {1}, point: {2}".format(axis, axis_dist, node))
-            if max_dist < axis_dist and len(candidates) > k:
+            if max_dist < axis_dist and len(candidates) >= k:
                 return nodes_visited
             else:
-                current_dist = metric(node.point, point)
+                current_dist = self.metric(node.point, point)
                 logger.debug("append candidate {0} with distance {1}".format(node, current_dist))
                 candidates.add((current_dist, node))
 
@@ -123,13 +105,14 @@ class KDTree(object):
             return [(closest_dist, closest_node)], visit_count, visited_nodes
         else:
             visit_count = travel(self.root)
+            logger.info("expected {0}, touched {1}, candidates: {2}".format(k, visit_count, len(candidates)))
             return candidates[0:k], visit_count, candidates
 
     def closest(self, point):
-        visited_nodes = []
+        candidates = []
 
-        def travel(node, min_dist):
-            logger.debug("visit {0}, dist: {1}".format(node, min_dist))
+        def travel(node, closest_dist):
+            logger.debug("enter visit {0}, dist: {1}".format(node, closest_dist))
             if node is None:
                 return np.inf, node, 0
 
@@ -143,34 +126,37 @@ class KDTree(object):
                 nearer_node = node.right_child
                 further_node = node.left_child
 
-            nearer_dist, nearer_node, nearer_count = travel(nearer_node, min_dist)  # 查找临近子树的最近节点
-            node_visited += nearer_count
+            tmp_dist, tmp_node, touched = travel(nearer_node, closest_dist)  # 查找临近子树的最近节点
+            node_visited += touched
 
             target_node = None
-            if nearer_dist < min_dist:
-                min_dist, target_node = nearer_dist, nearer_node
+            if tmp_dist < closest_dist:
+                closest_dist, target_node = tmp_dist, tmp_node
 
             axis_dist = np.abs(node.point[axis] - point[axis])  # 第axis维上目标点与分割超平面的距离
             logger.debug("axis: {0}, distance: {1}, point: {2}".format(axis, axis_dist, node))
-            if min_dist < axis_dist:
-                return min_dist, target_node, node_visited  # 不相交则可以直接返回，不用继续判断
+            if closest_dist < axis_dist:
+                logger.debug("exit visit exclusive node {0}".format(node))
+                return closest_dist, target_node, node_visited  # 不相交则可以直接返回，不用继续判断
             else:
-                current_dist = metric(node.point, point)
-                if current_dist < min_dist:
-                    min_dist, target_node = current_dist, node
-                logger.debug("metric {0}".format(node))
-                visited_nodes.append((current_dist, node))
+                current_dist = self.metric(node.point, point)
+                if current_dist < closest_dist:
+                    closest_dist, target_node = current_dist, node
 
-                further_dist, further_node, further_count = travel(further_node, min_dist)
+                logger.debug("metric {0}".format(node))
+                candidates.append((current_dist, node))
+
+                tmp_dist, tmp_node, further_count = travel(further_node, closest_dist)
                 node_visited += further_count
 
-                if further_dist < min_dist:
-                    min_dist, target_node = further_dist, further_node
-
-                return min_dist, target_node, node_visited
+                if tmp_dist < closest_dist:
+                    closest_dist, target_node = tmp_dist, tmp_node
+                logger.debug("exit visit inclusive node {0}".format(node))
+                return closest_dist, target_node, node_visited
 
         dist, target, nodes_visited = travel(self.root, np.inf)
-        return dist, target, nodes_visited, visited_nodes
+        logger.info("expected {0}, touched {1}, candidates: {2}".format(1, nodes_visited, len(candidates)))
+        return dist, target, nodes_visited, candidates
 
     def traversal(self, visit, kind='preorder'):
         if kind == 'inorder':

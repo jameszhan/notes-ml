@@ -52,13 +52,15 @@ def draw_point(n):
 
 
 def show_closest(tree, point, c):
-    dist, node, count, visited_nodes = tree.closest(point)
+    dist, node, count, candidates = tree.closest(point)
     ax.text(point[0] - 0.35, point[1] - 0.25, "({0}, {1})".format(*point), color='g', alpha=0.8)
     ax.scatter(*point, c=c, marker='*', s=30, alpha=0.7)
-    print("draw circle with radius {0} nodes visited is {1}".format(dist, count))
     i = 10
-    for d, _ in visited_nodes:
+    for d, n in candidates:
         alpha = 0.1 * i
+        if alpha <= 0:
+            alpha = 0.1
+        logger.info("draw circle with radius {0} with point {1}".format(d, n.point))
         ax.add_patch(Circle(point, d, color=c, fill=False, alpha=alpha))
         i -= 2
 
@@ -81,11 +83,11 @@ class TestKDTree2d(unittest.TestCase):
         logger.info("dist = {0}, node = {1}, visit_count = {2}".format(dist, node, count))
         logger.info("visited nodes = {0}".format(nodes))
 
-        dist, node, count, nodes = self.tree.closest((2, 4.5))
+        dist, node, count, nodes = self.tree.closest((2.0, 4.5))
         logger.info("dist = {0}, node = {1}, visit_count = {2}".format(dist, node, count))
         logger.info("visited nodes = {0}".format(nodes))
 
-        dist, node, count, nodes = self.tree.closest((7.5, 5))
+        dist, node, count, nodes = self.tree.closest((6.9, 4.2))
         logger.info("dist = {0}, node = {1}, visit_count = {2}".format(dist, node, count))
         logger.info("visited nodes = {0}".format(nodes))
 
@@ -93,11 +95,10 @@ class TestKDTree2d(unittest.TestCase):
         self.tree.traversal(draw_point, 'preorder')
         show_closest(self.tree, (2.3, 3.3), 'r')
         show_closest(self.tree, (2.0, 4.5), 'g')
-        show_closest(self.tree, (7.5, 5.0), 'b')
+        show_closest(self.tree, (6.8, 4.2), 'm')
         plt.show()
 
 
 if __name__ == '__main__':
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s')
-
     unittest.main()

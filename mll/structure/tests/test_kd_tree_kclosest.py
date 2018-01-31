@@ -67,16 +67,6 @@ def show_closest(tree, point, k, c):
 
 class TestKDTree2d(unittest.TestCase):
 
-    # def test_visualization(self):
-    #     points = [(2, 3), (5, 4), (9, 6), (4, 7), (8, 1), (7, 2)]
-    #     tree = KDTree(points)
-    #
-    #     tree.traversal(draw_point, 'preorder')
-    #     show_closest(tree, (2.3, 3.3), 3, 'r')
-    #     show_closest(tree, (2.0, 4.5), 3, 'g')
-    #     show_closest(tree, (7.5, 5.0), 3, 'b')
-    #     plt.show()
-
     def test_random(self):
         count, sigma1, sigma2 = 10000, 0.6, 0.5
 
@@ -92,7 +82,7 @@ class TestKDTree2d(unittest.TestCase):
         points = np.c_[x, y]
 
         tree = KDTree(points)
-        show_closest(tree, point, 10, 'm')
+        show_closest(tree, point, 50, 'm')
         plt.show()
 
 

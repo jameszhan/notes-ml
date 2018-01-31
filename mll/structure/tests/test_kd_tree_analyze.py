@@ -7,7 +7,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 
-
 parent_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 sys.path.append(parent_path)
 
@@ -52,20 +51,36 @@ def draw_point(n):
 
 
 def show_closest(tree, point, c):
-    dist, node, _, visited_nodes = tree.closest(point)
+    dist, node, _, candidates = tree.closest(point)
     ax.text(point[0] - 0.35, point[1] - 0.25, "({0}, {1})".format(*point), color='g', alpha=0.8)
     ax.scatter(*point, c=c, marker='*', s=30, alpha=0.7)
-    print("draw circle with radius {0}".format(dist))
     i = 10
-    for d, _ in visited_nodes:
+    for d, n in candidates:
         alpha = 0.1 * i
+        if alpha <= 0:
+            alpha = 0.1
+        logger.info("draw circle with radius {0} with point {1}".format(d, n.point))
+        ax.add_patch(Circle(point, d, color=c, fill=False, alpha=alpha))
+        i -= 2
+
+
+def show_kclosest(tree, point, k, c):
+    nodes, _, candidates = tree.kclosest(point, k)
+    ax.text(point[0] - 0.35, point[1] - 0.25, "({0}, {1})".format(*point), color='g', alpha=0.8)
+    ax.scatter(*point, c=c, marker='*', s=30, alpha=0.7)
+    i = 10
+    for d, n in candidates:
+        alpha = 0.1 * i
+        if alpha <= 0:
+            alpha = 0.1
+        logger.info("draw circle with radius {0} with point {1}".format(d, n.point))
         ax.add_patch(Circle(point, d, color=c, fill=False, alpha=alpha))
         i -= 2
 
 
 class TestKDTreeAnalyze(unittest.TestCase):
     def setUp(self):
-        points = [(6, 3), (5, 4), (9, 6), (4, 7), (8, 1), (7, 2)]
+        points = [(2, 3), (5, 4), (9, 6), (4, 7), (8, 1), (7, 2)]
         self.tree = KDTree(points)
 
     def test_traversal(self):
@@ -77,13 +92,14 @@ class TestKDTreeAnalyze(unittest.TestCase):
         self.tree.traversal(lambda n: logger.info(n), "postorder")
 
     def test_closest(self):
-        dist, node, count, nodes = self.tree.closest((6.3, 3.3))
+        dist, node, count, nodes = self.tree.closest((5.5, 9.5))
         logger.info("dist = {0}, node = {1}, visit_count = {2}".format(dist, node, count))
         logger.info("visited nodes = {0}".format(nodes))
 
     def test_visualization(self):
         self.tree.traversal(draw_point, 'preorder')
-        show_closest(self.tree, (6.5, 2.3), 'r')
+        show_closest(self.tree, (5.5, 9.5), 'm')
+        show_kclosest(self.tree, (5.5, 9.5), 3, 'b')
         plt.show()
 
 

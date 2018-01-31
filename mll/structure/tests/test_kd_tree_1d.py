@@ -28,9 +28,9 @@ class TestKDTree1d(unittest.TestCase):
         self.tree.traversal(lambda n: logger.info(n), "postorder")
 
     def test_closest(self):
-        dist, node, count, nodes = self.tree.closest([15])
+        dist, node, count, candidates = self.tree.closest([15])
         logger.info("dist = {0}, node = {1}, visit_count = {2}".format(dist, node, count))
-        logger.info("visited nodes = {0}".format(nodes))
+        logger.info("visited nodes = {0}".format(candidates))
 
 
 if __name__ == '__main__':
