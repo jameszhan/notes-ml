@@ -111,12 +111,12 @@ class KDTree(object):
     def closest(self, point):
         candidates = []
 
-        def travel(node, closest_dist):
-            logger.debug("enter visit {0}, dist: {1}".format(node, closest_dist))
+        def travel(node, init_dist):
+            logger.debug("enter visit {0}, dist: {1}".format(node, init_dist))
             if node is None:
                 return np.inf, node, 0
 
-            node_visited = 1
+            closest_dist, closest_node, nodes_visited = init_dist, node, 1
 
             axis = node.axis
             if point[axis] < node.point[axis]:
@@ -126,37 +126,36 @@ class KDTree(object):
                 nearer_node = node.right_child
                 further_node = node.left_child
 
-            tmp_dist, tmp_node, touched = travel(nearer_node, closest_dist)  # 查找临近子树的最近节点
-            node_visited += touched
+            tmp_dist, tmp_node, touched = travel(nearer_node, init_dist)            # 查找临近子树的最近节点
+            nodes_visited += touched
 
-            target_node = None
             if tmp_dist < closest_dist:
-                closest_dist, target_node = tmp_dist, tmp_node
+                closest_dist, closest_node = tmp_dist, tmp_node
 
             axis_dist = np.abs(node.point[axis] - point[axis])  # 第axis维上目标点与分割超平面的距离
             logger.debug("axis: {0}, distance: {1}, point: {2}".format(axis, axis_dist, node))
-            if closest_dist < axis_dist:
+            if closest_dist < axis_dist:                        # 不相交则可以直接返回，不用继续判断
                 logger.debug("exit visit exclusive node {0}".format(node))
-                return closest_dist, target_node, node_visited  # 不相交则可以直接返回，不用继续判断
             else:
                 current_dist = self.metric(node.point, point)
                 if current_dist < closest_dist:
-                    closest_dist, target_node = current_dist, node
+                    closest_dist, closest_node = current_dist, node
 
                 logger.debug("metric {0}".format(node))
                 candidates.append((current_dist, node))
 
-                tmp_dist, tmp_node, further_count = travel(further_node, closest_dist)
-                node_visited += further_count
+                tmp_dist, tmp_node, touched = travel(further_node, closest_dist)    # 查找远点子树的最近节点
+                nodes_visited += touched
 
                 if tmp_dist < closest_dist:
-                    closest_dist, target_node = tmp_dist, tmp_node
+                    closest_dist, closest_node = tmp_dist, tmp_node
                 logger.debug("exit visit inclusive node {0}".format(node))
-                return closest_dist, target_node, node_visited
 
-        dist, target, nodes_visited = travel(self.root, np.inf)
-        logger.info("expected {0}, touched {1}, candidates: {2}".format(1, nodes_visited, len(candidates)))
-        return dist, target, nodes_visited, candidates
+            return closest_dist, closest_node, nodes_visited
+
+        dist, target, count = travel(self.root, np.inf)
+        logger.info("expected {0}, touched {1}, candidates: {2}".format(1, count, len(candidates)))
+        return dist, target, count, candidates
 
     def traversal(self, visit, kind='preorder'):
         if kind == 'inorder':
