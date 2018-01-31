@@ -1,8 +1,21 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import logging
+from sortedcollections import SortedList
 
 logger = logging.getLogger("KDTree")
+
+
+class Neg(object):
+    def __init__(self, v):
+        assert v is not None
+        self.v = v
+
+    def __eq__(self, other):
+        return self.v == (other.v)
+
+    def __lt__(self, other):
+        return not self.v < other.v
 
 
 class KDNode(object):
@@ -63,6 +76,61 @@ def metric(x1, x2):
 class KDTree(object):
     def __init__(self, data_list, labels=None):
         self._build(data_list, labels)
+
+    def kclosest(self, point, k=1):
+        candidates = SortedList()
+
+        def current_max():
+            candidates_len = len(candidates)
+            if candidates_len >= k:
+                return candidates[k-1]
+            elif candidates_len > 0:
+                return candidates[-1]
+            else:
+                return np.inf
+
+        def travel(node):
+            logger.debug("visit {0}".format(node))
+            if node is None:
+                return 0
+            nodes_visited = 1
+
+            axis = node.axis
+            if point[axis] < node.point[axis]:
+                nearer_node = node.left_child
+                further_node = node.right_child
+            else:
+                nearer_node = node.right_child
+                further_node = node.left_child
+
+            nodes_visited += travel(nearer_node)
+
+            max_dist = current_max()
+
+            if len(candidates) > k:
+                axis_dist = np.abs(node.point[axis] - point[axis])
+                logger.debug("axis: {0}, distance: {1}, point: {2}".format(axis, axis_dist, node))
+                max_dist = candidates[0].v[0]
+                if max_dist < axis_dist:
+                    return nodes_visited
+
+            current_dist = metric(node.point, point)
+            heappush(candidates, Neg((current_dist, node)))
+
+            nodes_visited += travel(further_node)
+            return nodes_visited
+
+        if k == 1:
+            dist, node, nodes_visited, visited_nodes = self.closest(point)
+            return [(dist, node)], nodes_visited, visited_nodes
+        else:
+            nodes_visited = travel(self.root)
+            heap_size = len(candidates)
+            print("candidates = {0}".format(candidates))
+            visited_nodes = []
+            for _ in range(heap_size):
+                heappush(visited_nodes, heappop(candidates).v)
+            return nsmallest(k, visited_nodes), nodes_visited, visited_nodes
 
     def closest(self, point):
         visited_nodes = []
