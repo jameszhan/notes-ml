@@ -11,7 +11,7 @@ def gd(x_start, step, f, epsilon=1e-8):
     for i in range(200):
         grad = derivative(f, epsilon)(x)
         x -= grad * step
-        print '[ Epoch {0} ] grad = {1}, x = {2}'.format(i, grad, x)
+        print('[ Epoch {0} ] grad = {1}, x = {2}'.format(i, grad, x))
         if abs(grad) < epsilon:
             break
     return x
@@ -22,4 +22,4 @@ def f(x):
 
 
 x = gd(100, 0.6, f)
-print 'extremum = ({0}, {1})'.format(x, f(x))
+print('extremum = ({0}, {1})'.format(x, f(x)))

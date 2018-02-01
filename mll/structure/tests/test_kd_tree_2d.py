@@ -82,14 +82,17 @@ class TestKDTree2d(unittest.TestCase):
         dist, node, count, nodes = self.tree.closest((2.3, 3.3))
         logger.info("dist = {0}, node = {1}, visit_count = {2}".format(dist, node, count))
         logger.info("visited nodes = {0}".format(nodes))
+        self.assertTrue(np.all(node.point == (2, 3)), "actual is {0}".format(node.point))
 
         dist, node, count, nodes = self.tree.closest((2.0, 4.5))
         logger.info("dist = {0}, node = {1}, visit_count = {2}".format(dist, node, count))
         logger.info("visited nodes = {0}".format(nodes))
+        self.assertTrue(np.all(node.point == (2, 3)), "actual is {0}".format(node.point))
 
         dist, node, count, nodes = self.tree.closest((6.9, 4.2))
         logger.info("dist = {0}, node = {1}, visit_count = {2}".format(dist, node, count))
         logger.info("visited nodes = {0}".format(nodes))
+        self.assertTrue(np.all(node.point == (5, 4)))
 
     def test_visualization(self):
         self.tree.traversal(draw_point, 'preorder')

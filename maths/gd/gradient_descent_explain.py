@@ -55,7 +55,7 @@ if __name__ == '__main__':
     def linear_equation(x, a, b):
         return b + a * (x - 2000)
 
-    print 'y = {0} * (x - 2000) + {1}'.format(a, b)
+    print('y = {0} * (x - 2000) + {1}'.format(a, b))
     plt.plot(x_axis, [linear_equation(x, a, b) for x in x_axis], 'r:')
     plt.grid(True)
     plt.show()

@@ -95,6 +95,7 @@ class TestKDTreeAnalyze(unittest.TestCase):
         dist, node, count, nodes = self.tree.closest((5.5, 9.5))
         logger.info("dist = {0}, node = {1}, visit_count = {2}".format(dist, node, count))
         logger.info("visited nodes = {0}".format(nodes))
+        self.assertTrue(np.all(node.point == (4, 7)), "actual is {0}".format(node.point))
 
     def test_visualization(self):
         self.tree.traversal(draw_point, 'preorder')
