@@ -24,5 +24,5 @@ h_ins = host()
 h_ins.the_prop = 1
 h_ins.the_prop = 'string'
 
-print h_ins.the_prop
+print(h_ins.the_prop)
     
