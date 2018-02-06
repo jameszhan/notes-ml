@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import logging
+from collections import Counter
 from sortedcollections import SortedListWithKey
 
 logger = logging.getLogger("KDTree")
@@ -57,6 +58,12 @@ class KDTree(object):
     def __init__(self, data_list, labels=None, metric=default_get_distince):
         self.metric = metric
         self._build(data_list, labels)
+
+    def predict(self, point, k=1):
+        nodes, count, visited_nodes = self.kclosest(point, k)
+        class_list = [n[1].label for n in nodes]
+        counter = Counter(class_list)
+        return counter.most_common(1)[0][0]
 
     def kclosest(self, point, k=1):
         candidates = SortedListWithKey(key=lambda v: v[0])

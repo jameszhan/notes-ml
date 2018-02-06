@@ -13,7 +13,6 @@ def bgd(x, y, h, cost, hypothesis, alpha=0.01, epsilon=1e-6):
         theta -= alpha * gradient
 
 
-
 def bgd2(rows, labels, hypothesis, cost, alpha=0.01, epsilon=1e-6, trace=True):
     m = len(rows)
     _X = np.column_stack((np.ones(m), rows))
