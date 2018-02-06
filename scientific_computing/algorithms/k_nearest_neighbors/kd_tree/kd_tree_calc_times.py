@@ -8,7 +8,7 @@ from kd_tree import kd_tree, closest, preorder_traversal
 import logging
 import sys
 
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s')
+logging.basicConfig(stream=sys.stdout, level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 figure = plt.figure(figsize=(10, 10))
 
@@ -16,7 +16,7 @@ ax = figure.add_subplot(111, aspect=True)
 ax.grid(True)
 figure.subplots_adjust(left=0.05, bottom=0.05, right=0.99, top=0.99, wspace=None, hspace=None)
 
-count, sigma1, sigma2 = 10, 0.6, 0.5
+count, sigma1, sigma2 = 500, 0.6, 0.5
 
 np.random.seed(0)
 x1 = np.random.normal(5, sigma1, count)
@@ -43,20 +43,21 @@ colors = ['r', 'y', 'g', 'b', 'm', 'c', 'k']
 
 
 def show_closests(k, i):
-    closest_points = closest(tree, point, k=k)
+    closest_points, _, _ = closest(tree, point, k=k)
     max_dist = closest_points[-1][0]
     print("draw circle with radius {0}".format(max_dist))
     for d, node in closest_points:
-        print("point = {0}, distance = {1}".format(node, d))
+        # print("point = {0}, distance = {1}".format(node, d))
         ax.add_patch(Circle(point, d, color=colors[i % len(colors)], fill=False))
 
 
-# show_closests(1, 0)
+show_closests(1, 0)
 show_closests(3, 1)
-# show_closests(10, 2)
-# show_closests(50, 3)
-# show_closests(100, 4)
-# show_closests(200, 5)
-# show_closests(300, 5)
+show_closests(10, 2)
+show_closests(50, 3)
+show_closests(100, 4)
+show_closests(200, 5)
+show_closests(300, 5)
+show_closests(500, 6)
 
 plt.show()

@@ -2,6 +2,7 @@
 import numpy as np
 import heapq
 import logging
+from sortedcollections import SortedListWithKey
 
 logger = logging.getLogger("KDTree")
 
@@ -17,14 +18,6 @@ class KDNode(object):
 
     def is_leaf(self):
         return self.left_child is None and self.right_child is None
-
-    def __lt__(self, other):
-        if other is None:
-            return -1
-        elif other == self:
-            return 0
-        else:
-            return 1
 
     def __str__(self):
         return "{0}:{1}".format(self.point, self.axis)
@@ -88,68 +81,51 @@ def _handle_node(heap, k, distance, node):
         logger.debug("ignore node {0}".format(node.point))
 
 
-def _closest(node, point, best_nodes, k):
-    print("enter {0}".format(node.point))
-    dim = node.axis
-    own_distance = metric(node.point, point)
-
-    parent_node = node.parent
-    if parent_node:
-        dims = len(parent_node.point)
-        linear_point = np.zeros(dims)
-        for i in range(dims):
-            if i == parent_node.axis:
-                linear_point[i] = point[i]
-            else:
-                linear_point[i] = parent_node.point[i]
-        linear_distance = metric(linear_point, node.point)
-    else:
-        linear_distance = np.inf
-        linear_point = None
-
-    if node.is_leaf():
-        _handle_node(best_nodes, k, own_distance, node)
-        logger.debug("node: {0}, linear_node = {1}, parent_node = {2}".format(node, linear_point, parent_node))
-        if len(best_nodes) < k or linear_distance < own_distance:
-            if node == parent_node.left_child:
-                other_child = parent_node.right_child
-            else:
-                other_child = parent_node.left_child
-            if other_child:
-                _closest(other_child, point, best_nodes, k)
-    else:
-        if node.right_child is None:
-            best_child = node.left_child
-        elif node.left_child is None:
-            best_child = node.right_child
-        else:
-            if point[dim] < node.point[dim]:
-                best_child = node.left_child
-            else:
-                best_child = node.right_child
-
-        _closest(best_child, point, best_nodes, k)
-
-        _handle_node(best_nodes, k, own_distance, node)
-
-        logger.debug("node: {0}, linear_node = {1}, parent_node = {2}".format(node, linear_point, parent_node))
-        if len(best_nodes) < k or linear_distance < own_distance:
-            if best_child == node.left_child:
-                other_child = node.right_child
-            else:
-                other_child = node.left_child
-            if other_child:
-                _closest(other_child, point, best_nodes, k)
-
-    print("exit {0}".format(node.point))
-
-
 def closest(root, point, k=1):
-    best_nodes = []
-    _closest(root, point, best_nodes, k)
-    logger.info("expected {0} actual {1}".format(k, len(best_nodes)))
-    logger.debug("best_nodes = {0}".format(best_nodes))
-    return heapq.nsmallest(len(best_nodes), best_nodes)
+    candidates = SortedListWithKey(key=lambda v: v[0])
+
+    def current_max():
+        candidates_len = len(candidates)
+        if candidates_len >= k:
+            return candidates[k - 1][0]
+        elif candidates_len > 0:
+            return candidates[-1][0]
+        else:
+            return np.inf
+
+    def travel(node):
+        logger.debug("visit {0}".format(node))
+        if node is None:
+            return 0
+
+        nodes_visited = 1
+
+        axis = node.axis
+        if point[axis] < node.point[axis]:
+            nearer_node = node.left_child
+            further_node = node.right_child
+        else:
+            nearer_node = node.right_child
+            further_node = node.left_child
+
+        nodes_visited += travel(nearer_node)
+
+        max_dist = current_max()
+        axis_dist = np.abs(node.point[axis] - point[axis])
+        logger.debug("axis: {0}, distance: {1}, point: {2}".format(axis, axis_dist, node))
+        if max_dist < axis_dist and len(candidates) >= k:
+            return nodes_visited
+        else:
+            current_dist = metric(node.point, point)
+            logger.debug("append candidate {0} with distance {1}".format(node, current_dist))
+            candidates.add((current_dist, node))
+
+            nodes_visited += travel(further_node)
+            return nodes_visited
+
+    visit_count = travel(root)
+    logger.info("expected {0}, touched {1}, candidates: {2}".format(k, visit_count, len(candidates)))
+    return candidates[0:k], visit_count, candidates
 
 
 if __name__ == '__main__':
@@ -221,7 +197,7 @@ if __name__ == '__main__':
 
 
     def show_closest(k):
-        closest_points = closest(tree, point, k=k)
+        closest_points, _, _ = closest(tree, point, k=k)
         max_dist = closest_points[-1][0]
         print("draw circle with radius {0}".format(max_dist))
         for d, node in closest_points:
