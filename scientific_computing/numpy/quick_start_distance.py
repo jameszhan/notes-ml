@@ -86,7 +86,6 @@ print("minkowski(3) = {0}".format(minkowski(v1, v2, 3)))
 print("minkowski(100) = {0}".format(minkowski(v1, v2, 100.0)))
 
 
-
 # cos(\theta) = \frac{\sum_{k=1}^n x_{1k}x_{2k}}{\sqrt{\sum_{k=1}^n x_{1k}^2} \sqrt{\sum_{k=1}^n x_{2k}^2}}
 # cos(\theta) = \frac{AB}{|A||B|}
 def cosine(vec1, vec2):
