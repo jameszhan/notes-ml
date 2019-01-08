@@ -1,3 +1,7 @@
+# notes-ml
+
+机器学习手札
+
 ## Anaconda
 
 ```bash
@@ -39,5 +43,6 @@ conda remove nb_conda
 
 * CMD + SHIFT + P: Select Workspace Interpreter
 * RIGNT CLICK: Run Python File In Ternimal
+
 
 
