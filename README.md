@@ -1,13 +1,7 @@
 # notes-ml
-<<<<<<< HEAD
-机器学习手札
-
-=======
-=======
 
 机器学习手札
 
->>>>>>> 165db66
 ## Anaconda
 
 ```bash
@@ -45,8 +39,4 @@ conda remove nb_conda
 * CMD + SHIFT + P: Select Workspace Interpreter
 * RIGNT CLICK: Run Python File In Ternimal
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 165db66
