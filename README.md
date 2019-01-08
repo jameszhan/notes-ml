@@ -21,6 +21,13 @@ python -c 'import sys; print(sys.version)'
 source deactivate python2
 ```
 
+```bash
+# conda install -c conda-forge jupyter_contrib_nbextensions
+
+conda install nb_conda
+conda remove nb_conda
+```
+
 
 
 

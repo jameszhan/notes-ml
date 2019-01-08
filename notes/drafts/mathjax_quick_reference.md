@@ -27,6 +27,9 @@
 | \chi | $\chi$ | X | $X$ |
 | \psi | $\psi$ | \Psi | $\Psi$ |
 | \omega | $\omega$ | \Omega | $\Omega$ |
+| \propto | $\propto$ | \partial | $\partial$ |
+| \vert | $\vert$ | \Vert | $\Vert$ |
+
 
 | 输入 | 显示 | 输入 | 显示 | 输入 | 显示 |
 | --- | --- | --- | --- | --- | --- |

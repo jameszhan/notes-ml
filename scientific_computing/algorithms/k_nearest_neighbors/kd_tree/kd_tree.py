@@ -153,17 +153,6 @@ if __name__ == '__main__':
 
     colors = ['r', 'b', 'g', 'y', 'm', 'c', 'k']
 
-    def accumulator(init):
-        i = init
-
-        def inc():
-            nonlocal i
-            i += 1
-            return i
-        return inc
-
-    counter = accumulator(0)
-
     def draw_point(n):
         if n.is_leaf():
             marker = 'o'
