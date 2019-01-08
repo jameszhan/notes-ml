@@ -40,3 +40,6 @@ conda remove nb_conda
 * RIGNT CLICK: Run Python File In Ternimal
 
 
+git lfs install
+
+
