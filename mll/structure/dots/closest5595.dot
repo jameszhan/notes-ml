@@ -1,0 +1,22 @@
+digraph G {
+    n72[label="(7, 2)",style="dashed",color="red"];
+    n54[label="(5, 4)"];
+    n47[label="(4, 7)",color="red"];
+    n96[label="(9, 6)"];
+    nn47[label="none"];     # none nearer node of (4, 7)
+    nf47[label="none"];     # none further node of (4, 7)
+    nn96[label="none"];     # none nearer node of (9, 6)
+
+    n72 -> n54[label="01"];
+    n54 -> n47[label="02"];
+    n47 -> nn47[label="03"];
+    nn47 -> n47[label="04",style="dashed"];
+    n47 -> nf47[label="05"];
+    nf47 -> n47[label="06",style="dashed"];
+    n47 -> n54[label="07",style="dashed"];
+    n54 -> n72[label="07",style="dashed"];
+    n72 -> n96[label="08"];
+    n96 -> nn96[label="09"];
+    nn96 -> n96[label="10",style="dashed"];
+    n96 -> n72[label="11",style="dashed"];
+}
