@@ -22,7 +22,6 @@ print(dijkstra())
 """
 import sys
 
-
 """
          B
        / |    \
@@ -90,4 +89,4 @@ def dijkstra(mat):
 
 
 show(M)
-print 'Path => {0}'.format(dijkstra(M))
+print('Path => {0}'.format(dijkstra(M)))
