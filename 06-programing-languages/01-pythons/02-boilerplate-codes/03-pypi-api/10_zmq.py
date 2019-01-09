@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+#
+# conda install -n python3 pyzmq
 
 import unittest
 import zmq
 import time
 import threading
-
 
 def send_message():
     context = zmq.Context()
@@ -40,9 +41,6 @@ def recv_message():
             break
 
 
-###
-# conda install -n python3 pyzmq
-###
 class TestPyZeroMQ(unittest.TestCase):
 
     def test_client(self):

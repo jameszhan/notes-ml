@@ -40,4 +40,3 @@ if __name__ == '__main__':
     print('permutation({0}, 3) => {1}'.format(items, permutation(items, 3)))
     print('permutation({0}, 4) => {1}'.format(items, permutation(items, 4)))
     print('permutation({0}, 5) => {1}'.format(items, permutation(items, 5)))
-

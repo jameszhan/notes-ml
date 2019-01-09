@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from sortedcollections import *
+from sortedcollections import SortedList, SortedListWithKey
 
 
 ###

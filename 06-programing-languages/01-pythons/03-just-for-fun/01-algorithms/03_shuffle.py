@@ -11,5 +11,5 @@ def shuffle(l):
 
 
 items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-print 'Before Shuffle:\t{0}'.format(items)
-print 'After Shuffle:\t{0}'.format(shuffle(items))
+print('Before Shuffle:\t{0}'.format(items))
+print('After Shuffle:\t{0}'.format(shuffle(items)))

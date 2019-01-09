@@ -1,8 +1,8 @@
-################ Lispy: Scheme Interpreter in Python
+# Lispy: Scheme Interpreter in Python
 
-## (c) Peter Norvig, 2010; See http://norvig.com/lispy.html
+# (c) Peter Norvig, 2010; See http://norvig.com/lispy.html
 
-################ Symbol, Env classes
+# Symbol, Env classes
 
 from __future__ import division
 
@@ -21,11 +21,10 @@ class Env(dict):
         return self if var in self else self.outer.find(var)
 
 
-
-
 def add_globals(env):
     """Add some Scheme standard procedures to an environment."""
-    import math, operator as op
+    import math
+    import operator as op
     env.update(vars(math))  # sin, sqrt, ...
     env.update(
         {'+': op.add, '-': op.sub, '*': op.mul, '/': op.itruediv, 'not': op.not_,
@@ -41,7 +40,7 @@ global_env = add_globals(Env())
 
 isa = isinstance
 
-################ eval
+# eval
 
 
 def eval(x, env=global_env):
@@ -75,7 +74,7 @@ def eval(x, env=global_env):
         return proc(*exps)
 
 
-################ parse, read, and user interaction
+# parse, read, and user interaction
 
 def read(s):
     """Read a Scheme expression from a string."""
@@ -127,7 +126,8 @@ def repl(prompt='scheme.py> '):
     "A prompt-read-eval-print loop."
     while True:
         val = eval(parse(input(prompt)))
-        if val is not None: print(to_string(val))
+        if val is not None:
+            print(to_string(val))
 
 
 if __name__ == '__main__':

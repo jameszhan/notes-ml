@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
 
 
 def display(a):
     l = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']
     print([l[a[i]] for i in range(len(a))])
 
-    
-def backtracking1(n, m, check, handle):
+
+def backtrack_recursive(n, m, check, handle):
     def dfs(a, k):
         for i in range(n):
             a[k] = i
@@ -20,7 +19,7 @@ def backtracking1(n, m, check, handle):
     dfs(a, 0)
 
 
-def backtracking(n, m, check, handle):
+def backtrack_iterative(n, m, check, handle):
     k, a = 0, [-1 for _ in range(m)]
     while k >= 0:
         a[k] += 1
@@ -36,8 +35,11 @@ def backtracking(n, m, check, handle):
                 a[k] = -1
 
 
+backtrack = backtrack_iterative
+
+
 def counter(n, m):
-    backtracking(n, m, lambda a, k: True, lambda a: print(a))
+    backtrack(n, m, lambda a, k: True, lambda a: print(a))
 
 
 def permutation(n, m):
@@ -46,7 +48,7 @@ def permutation(n, m):
             if a[i] == a[k]:
                 return False
         return True
-    backtracking(n, m, check, display)
+    backtrack(n, m, check, display)
 
 
 def combination(n, m):
@@ -55,16 +57,16 @@ def combination(n, m):
             if a[i] >= a[k]:
                 return False
         return True
-    backtracking(n, m, check, display)
+    backtrack(n, m, check, display)
 
-    
+
 def nqueen(n):
     def check(a, k):
         for i in range(k):
             if a[i] == a[k] or abs(a[i] - a[k]) == k - i:
                 return False
         return True
-    backtracking(n, n, check, lambda a: print(a))
+    backtrack(n, n, check, lambda a: print(a))
 
 
 def deep_first_search(g):
@@ -121,6 +123,3 @@ if __name__ == '__main__':
 
     print("paths =>")
     deep_first_search(graph)
-
-
-

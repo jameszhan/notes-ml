@@ -33,23 +33,27 @@ if __name__ == '__main__':
 
     start = time.time()
     fibs = [fibonacci(i) for i in r]
-    print 'Time: {0}, fibonacci({1}) = {2}'.format(time.time() - start, r, fibs)
+    print('Time: {0}, fibonacci({1}) = {2}'.format(
+        time.time() - start, r, fibs))
 
     start = time.time()
     fibs = [fibonacci2(i) for i in r]
-    print 'Time: {0}, fibonacci2({1}) = {2}'.format(time.time() - start, r, fibs)
+    print('Time: {0}, fibonacci2({1}) = {2}'.format(
+        time.time() - start, r, fibs))
 
     start = time.time()
     fibs = [fibonacci3(i) for i in r]
-    print 'Time: {0}, fibonacci3({1}) = {2}'.format(time.time() - start, r, fibs)
+    print('Time: {0}, fibonacci3({1}) = {2}'.format(
+        time.time() - start, r, fibs))
 
     r = range(0, 1000, 100)
 
     start = time.time()
     fibs = [fibonacci2(i) for i in r]
-    print 'Time: {0}, fibonacci2({1}) = {2}'.format(time.time() - start, r, fibs)
+    print('Time: {0}, fibonacci2({1}) = {2}'.format(
+        time.time() - start, r, fibs))
 
     start = time.time()
     fibs = [fibonacci3(i) for i in r]
-    print 'Time: {0}, fibonacci3({1}) = {2}'.format(time.time() - start, r, fibs)
-
+    print('Time: {0}, fibonacci3({1}) = {2}'.format(
+        time.time() - start, r, fibs))
