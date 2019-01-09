@@ -2,6 +2,21 @@
 
 机器学习手札
 
+## Git LFS
+
+```bash
+git lfs install
+
+git lfs track "*.csv"
+git lfs track "*.zip"
+git lfs track "*.tar.gz"
+git lfs track "*.mat"
+
+git lfs track
+
+git lfs ls-files
+```
+
 ## Anaconda
 
 ```bash
@@ -40,6 +55,5 @@ conda remove nb_conda
 * RIGNT CLICK: Run Python File In Ternimal
 
 
-git lfs install
 
 
