@@ -6,7 +6,7 @@ class TestClass(object):
         print('TestClass intialized')
 
     def member_method(self, x):
-        print('member_method invoked with ', x)
+        print('member_method invoked with', x)
 
 def func(x):
     print("Hello", x)

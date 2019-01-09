@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 def log(func):
     def wrapper(*args, **kv):
         print('enter: {0}, locals: {1}'.format(func.__name__, locals()))

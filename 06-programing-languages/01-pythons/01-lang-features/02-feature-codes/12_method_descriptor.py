@@ -42,4 +42,3 @@ Class2.do_something(10)
 
 obj2.do_smth()
 Class2.do_smth()
-
