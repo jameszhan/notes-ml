@@ -99,7 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
-snippets/
 *.pyc
 *.zip
 *.tar.gz

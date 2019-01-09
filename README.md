@@ -10,13 +10,13 @@ conda update anaconda
 
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-conda config --set show_channel_urls yes 
+conda config --set show_channel_urls yes
 
 conda env list
 ```
 
 ```bash
-conda create -n python2 python=2 scikit-learn 
+conda create -n python2 python=2 scikit-learn
 conda install numpy scipy sympy matplotlib -n python2
 
 source activate python2
