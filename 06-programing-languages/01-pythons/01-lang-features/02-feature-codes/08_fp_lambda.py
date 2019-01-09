@@ -1,6 +1,4 @@
 # -*- coding: utf8 -*-
-from __future__ import print_function
-
 
 def loop(n, func):
     def inner(n):

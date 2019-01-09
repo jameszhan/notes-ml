@@ -8,29 +8,28 @@ __author__ = 'james'
 '__setattr__', '__sizeof__', '__str__', '__subclasshook__'
 """
 
-
 class Base(object):
     def __getattr__(self, name):
         print("__getattr__", self, name)
         return name + " from getattr" 
     
     def __getattribute__(self, *args):
-        print("{0}.__getattribute__({1})".format( self, *args))
+        print("{0}.__getattribute__({1})".format(self, *args))
         return super(Base, self).__getattribute__(*args)
     
     def __get__(self, instance, owner):
         print("{0}.__get__({1}, {2})".format(self, instance, owner))
         return self
 
-
 class Other(object):  
     b = Base()
 
 
 if __name__ == '__main__':
-    print("dir(base) => ", dir(Base))    
+    print("dir(Base) => ", dir(Base))    
     print("Base.__hash__ => ", Base.__hash__)
     print('\n\n')
+
     b = Base()
     print("dir(b) => ", dir(b))
     print("b.__hash__ => ", b.__hash__)
@@ -40,6 +39,6 @@ if __name__ == '__main__':
     print(b.x)
 
     o = Other()  
-    print(o.b)
-    print(o.b.a)
+    print("o.b=", o.b)
+    print("o.b.a=", o.b.a)
 

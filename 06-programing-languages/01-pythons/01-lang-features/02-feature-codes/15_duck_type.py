@@ -1,16 +1,12 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 
 class Duck(object):
     def quark(self):
         print('Quaaaaaark!')
 
-
 class Person(object):
     def quark(self):
         print('Hello!')
-
 
 def quarking(duck):
     try:

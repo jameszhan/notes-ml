@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# The following code just can be run in python3
-
 
 class Iterable(object):
     def __init__(self):
@@ -17,5 +15,5 @@ class Iterable(object):
         return self.counter
 
 
-l = Iterable()
-print([x for x in l])
+it = Iterable()
+print([x for x in it])

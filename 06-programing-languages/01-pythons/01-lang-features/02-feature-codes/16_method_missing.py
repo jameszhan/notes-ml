@@ -1,10 +1,8 @@
 # -*- coding: utf8 -*-
 __author__ = 'james'
 
-
 def hi(name):
     return "hello %s" % name
-
 
 class Base(object):
     def __init__(self):
