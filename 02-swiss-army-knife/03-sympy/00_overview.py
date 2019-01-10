@@ -12,9 +12,9 @@ for m in dir(sp):
         if method_type != attr_type:
             type_str = str(attr_type)
             if type_str.startswith("<type 'str'"):
-                print 'sympy[{0}] = {1}.\n'.format(m, attr)
+                print('sympy[{0}] = {1}.\n'.format(m, attr))
             elif type_str.startswith("<class 'sympy.core.numbers"):
-                print 'sympy[{0}] = {1}, val: {2}.\n'.format(m, attr, attr.evalf())
+                print('sympy[{0}] = {1}, val: {2}.\n'.format(m, attr, attr.evalf()))
             elif type_str.startswith("<type 'type'>"):
                 types.append(m)
             elif type_str.startswith("<type 'module'>"):
@@ -22,10 +22,10 @@ for m in dir(sp):
             elif type_str.startswith("<class 'sympy.core.function"):
                 functions.append(m)
             else:
-                print 'sympy[{0}], type: {1}\n'.format(m, type(attr))
+                print('sympy[{0}], type: {1}\n'.format(m, type(attr)))
 
 
-print 'types: {0}'.format(types)
-print 'modules: {0}'.format(modules)
-print 'functions: {0}'.format(functions)
+print('types: {0}'.format(types))
+print('modules: {0}'.format(modules))
+print('functions: {0}'.format(functions))
 

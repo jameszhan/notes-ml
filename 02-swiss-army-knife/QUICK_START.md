@@ -1,7 +1,6 @@
-### 科学计算(Scientific Computing)
+# 科学计算(Scientific Computing)
 
-
-#### Quick Start
+## 科学计算的瑞士军刀
 
 * [Numpy](https://docs.scipy.org/doc/numpy-dev/user/quickstart.html)
 * [Pandas](http://pandas.pydata.org/pandas-docs/stable/10min.html)
