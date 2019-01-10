@@ -62,9 +62,6 @@ def gd(X, Y, alpha=0.01, epsilon=1e-6):
     return theta
 
 
-
-
-
 def bgd(X, Y, alpha=0.01, epsilon=1e-6, trace=True):
     m = len(X)
     _X = np.column_stack((np.ones(m), X))
@@ -94,11 +91,8 @@ def bgd(X, Y, alpha=0.01, epsilon=1e-6, trace=True):
 def hypothesis(X, theta):
     return 1.0 / (1 + np.exp(-np.dot(X, theta)))
 
-
 def cost(hypothesis, x, theta, y):
     h = hypothesis(x, theta)
-
-
 
 def h(x, theta):
     return 1 / (1 + np.exp(-np.dot(x, theta)))
@@ -110,7 +104,6 @@ def cost(x, y, theta):
         return -np.log(_h)
     else:
         return -np.log(1 - _h)
-
 
 def J(X, Y, theta):
     m, n = np.shape(X)

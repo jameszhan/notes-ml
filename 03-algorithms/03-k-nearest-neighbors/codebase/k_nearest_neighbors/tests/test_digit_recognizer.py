@@ -6,17 +6,16 @@ import logging
 import unittest
 import time
 import numpy as np
+from os import path
 
-parent_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-sys.path.append(parent_path)
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from k_neighbors_classifier import KNeighborsClassifier
 
 logger = logging.getLogger("unittestLogger")
 
-
 def load_data(file):
-    with open(file,'r') as csvfile:
+    with open(file, 'r') as csvfile:
         lines = csv.reader(csvfile)
         train_label, train_data = [], []
         test_label, test_data = [], []
@@ -32,11 +31,12 @@ def load_data(file):
                 test_label.append(line[0])
         return np.array(train_data, np.int), np.array(train_label, np.int), np.array(test_data, np.int), np.array(test_label, np.int)
 
+training_data_path = os.path.realpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../../../../assets/data/digit_recognizer/train.csv"))
 
 class TestDigitRecognizer(unittest.TestCase):
     def setUp(self):
         start_time = time.time()
-        self.train_data, self.train_labels, self.test_data, self.test_labels = load_data("../../data/train.csv")
+        self.train_data, self.train_labels, self.test_data, self.test_labels = load_data(training_data_path)
         load_time = time.time()
         logger.info("Load Data cost {0}s".format(load_time - start_time))
 

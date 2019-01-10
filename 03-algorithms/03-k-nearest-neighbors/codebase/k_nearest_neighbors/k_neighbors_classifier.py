@@ -3,15 +3,15 @@
 import os
 import sys
 import numpy as np
+from os import path
 from collections import Counter
 
-parent_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-sys.path.append(parent_path)
+kdtree_dir = path.realpath(path.join(path.dirname(__file__), os.pardir, "kd_tree"))
+sys.path.append(kdtree_dir)
 
-from structure.kd_tree import KDTree
+from kd_tree import KDTree
 
 VALID_ALGORITHMS = ['kd_tree', 'brute']
-
 
 def default_get_distince(x1, x2):
     return np.linalg.norm(np.subtract(x1, x2), ord=2)
