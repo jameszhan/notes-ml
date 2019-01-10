@@ -11,6 +11,7 @@ x = np.linspace(-6 * np.pi, 6 * np.pi, 1000)
 y = np.sin(x)
 z = np.cos(x)
 
+ax.plot(x, y, z, 'r--')
 
 ax.set_xlabel('X Axis')
 ax.set_ylabel('Y Axis')

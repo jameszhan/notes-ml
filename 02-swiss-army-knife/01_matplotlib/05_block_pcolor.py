@@ -58,5 +58,3 @@ plt.subplot(2, 2, 4)
 plt.pcolormesh(x, y, C.T)
 
 plt.show()
-
-
