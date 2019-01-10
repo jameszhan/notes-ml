@@ -12,6 +12,8 @@ brew install graphviz
 points = [(2, 3), (5, 4), (9, 6), (4, 7), (8, 1), (7, 2)]
 ```
 
+相关代码参考 `tests/test_kd_tree_2d` 与 `tests/test_kd_tree_analyze`
+
 ```bash
 dot -Tpng closest2045.dot -o closest2045.png
 dot -Tpng closest2333.dot -o closest2333.png
