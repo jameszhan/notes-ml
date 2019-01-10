@@ -32,7 +32,7 @@ Y = [0.199, 0.389, 0.580, 0.783, 0.980, 1.177, 1.380, 1.575, 1.771]
 
 a, b = gd(X, Y, 0.05, 1e-6)
 
-print 'y = {0} * x + {1}'.format(a, b)
+print('y = {0} * x + {1}'.format(a, b))
 
 x = np.array(X)
 plt.plot(x, Y, 'o', label='Original data', markersize=5)

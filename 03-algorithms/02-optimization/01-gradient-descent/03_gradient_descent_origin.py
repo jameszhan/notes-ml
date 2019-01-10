@@ -25,7 +25,7 @@ def gd(X, Y, alpha=0.01, epsilon=1e-6):
             sse += loss ** 2
         sse = sse / (2 * m)
 
-        print "[ Epoch {0} ] theta = {1}, gd = {2}, sse = {3})".format(cnt, theta, gradient, sse)
+        print("[ Epoch {0} ] theta = {1}, gd = {2}, sse = {3})".format(cnt, theta, gradient, sse))
         cnt += 1
         if abs(sse2 - sse) < epsilon:
             break
@@ -39,7 +39,7 @@ Y = [0.199, 0.389, 0.580, 0.783, 0.980, 1.177, 1.380, 1.575, 1.771]
 
 b, a = gd(X, Y, 0.05, 1e-6)
 
-print 'y = {0} * x + {1}'.format(a, b)
+print('y = {0} * x + {1}'.format(a, b))
 
 x = np.array(X)
 plt.plot(x, Y, 'o', label='Original data', markersize=5)

@@ -1,3 +1,4 @@
+#coding=utf-8
 
 
 def bayes(pT, pfT, pf_T):
@@ -12,8 +13,6 @@ pfT = 0.999
 pf_T = 0.0001
 
 ret = bayes(pT, pfT, pf_T)
-print ret
+print("First Bayes: ", ret)
 
-print bayes(0.49977, pfT, pf_T)
-
-print 1.0/10000 + 0.999
+print("Second Bayes: ", bayes(ret, pfT, pf_T))
