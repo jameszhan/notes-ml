@@ -1,8 +1,8 @@
-# notes-ml
+# 机器学习手札
 
-机器学习手札
+## Git 配置
 
-## Git LFS
+### 配置 Git LFS
 
 ```bash
 git lfs install
@@ -17,43 +17,11 @@ git lfs track
 git lfs ls-files
 ```
 
-## Anaconda
+## 参考资料
 
-```bash
-conda update conda
-conda update anaconda
-
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-conda config --set show_channel_urls yes
-
-conda env list
-```
-
-```bash
-conda create -n python2 python=2 scikit-learn
-conda install numpy scipy sympy matplotlib -n python2
-
-source activate python2
-conda list
-python -c 'import sys; print(sys.version)'
-source deactivate python2
-```
-
-```bash
-# conda install -c conda-forge jupyter_contrib_nbextensions
-
-conda install nb_conda
-conda remove nb_conda
-```
-
-## How to Run Python3 File In VS Code
-
-### Select Workspace Interpreter
-
-* CMD + SHIFT + P: Select Workspace Interpreter
-* RIGNT CLICK: Run Python File In Ternimal
-
-
-
-[Google机器学习速成课程](https://developers.google.cn/machine-learning/crash-course/)
+[google-ml-qs]: https://developers.google.cn/machine-learning/crash-course/ "Google机器学习速成课程"
+[numpy]: hhttps://docs.scipy.org/doc/numpy/user/quickstart.html "NumPy"
+[pandas]: http://pandas.pydata.org/pandas-docs/stable/10min.html "Pandas"
+[matplotlib]: https://matplotlib.org/users/pyplot_tutorial.html "Matplotlib"
+[scipy]: http://python.usyiyi.cn/documents/scipy_lecture_notes/index.html "Scipy"
+[scikit-learn]: http://scikit-learn.org/stable/tutorial/basic/tutorial.html "scikit-learn"
