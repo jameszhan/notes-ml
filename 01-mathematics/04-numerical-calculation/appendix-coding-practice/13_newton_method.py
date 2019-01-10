@@ -11,17 +11,17 @@ def derivative(g, epsilon):
 def solve(g, initial, epsilon):
     guess, i = initial, 0
     while abs(g(guess)) > epsilon:
-        print '[ Epoch {0} ] guess = {1}'.format(i, guess)
+        print('[ Epoch {0} ] guess = {1}'.format(i, guess))
         guess -= (g(guess) / (derivative(g, epsilon)(guess)))
         i += 1
     return guess
 
 
 # 求解f(x) = x^2 - 5 = 0
-print solve(lambda x: x ** 2 - 5, 5, 1e-8)
+print(solve(lambda x: x ** 2 - 5, 5, 1e-8))
 
 # 求解f(x) = x^2 - 2 = 0
-print solve(lambda x: x ** 2 - 2, 2, 1e-8)
+print(solve(lambda x: x ** 2 - 2, 2, 1e-8))
 
 
 def sqrt(n):
@@ -33,8 +33,8 @@ def cube(n):
 
 
 n = 5
-print 'sqrt({0}) = {1}.\n'.format(n, sqrt(n), 10, 1e-6)
-print 'cube({0}) = {1}.\n'.format(n, cube(n), 1e-6)
+print('sqrt({0}) = {1}.\n'.format(n, sqrt(n)))
+print('cube({0}) = {1}.\n'.format(n, cube(n)))
 
 
 def solve_extremum(g, initial, epsilon):
@@ -43,8 +43,8 @@ def solve_extremum(g, initial, epsilon):
     return x, g(x)
 
 
-print '(x - 2) ** 2 = {0}, extremum = {1}.\n'.format(n, solve_extremum(lambda x: (x - 2) ** 2 - n, n, 1e-6))
-print 'x ** 3 = {0}, extremum = {1}.\n'.format(n, solve_extremum(lambda x: x ** 3 - n, n, 1e-6))
+print('(x - 2) ** 2 = {0}, extremum = {1}.\n'.format(n, solve_extremum(lambda x: (x - 2) ** 2 - n, n, 1e-6)))
+print('x ** 3 = {0}, extremum = {1}.\n'.format(n, solve_extremum(lambda x: x ** 3 - n, n, 1e-6)))
 
 
 X = np.linspace(-10, 10, 100)
