@@ -1,16 +1,22 @@
-## 梯度下降推导
+# 梯度下降推导
 
 
-#### 线性回归
+
+
+
+## 线性回归
+
 $$ h_\theta(x) = \theta_0 + \theta_1x_1 + \cdots + \theta_nx_n = \sum_{i=0}^n\theta_ix_i = \theta^Tx $$
 
-#### 损失函数(最小二乘)
+## 损失函数(最小二乘)
+
 $$ J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)} - y^{(i)}))^2 $$
 
-#### 梯度下降
+## 梯度下降概念
+
 $$ \theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta)  $$
 
-则$J(\theta)$梯度为
+则 $J(\theta)$ 梯度为
 
 $$ \nabla J(\theta) = 
 \begin{bmatrix}
@@ -22,7 +28,7 @@ $$ \nabla J(\theta) =
 \end{bmatrix}
 $$
 
-$$ 
+$$
 \frac{\partial J(\theta)}{\partial\theta_j} 
 = \frac{\partial}{\partial\theta_j}\left(\frac{1}{2m}\sum_{i=1}^m\left(h_{\theta}\left(x^{(i)}\right) - y^{(i)}\right)^2\right) 
 = \frac{1}{m}\sum_{i=1}^m\left(h_{\theta}\left(x^{(i)}\right) - y^{(i)}\right)x_j^{(i)}
@@ -32,7 +38,7 @@ $$
 
 $$ \theta_j := \theta_j - \alpha \frac{\partial}{\partial\theta_j}J(\theta) $$
 
-#### 代码推导过程
+## 代码推导过程
 
 ```python
 loss = np.dot(X, theta) - Y
@@ -40,7 +46,8 @@ gradient = np.dot(X.T, loss) / m
 theta -= alpha * gradient
 ```
 
-$$ LOSS = X \cdot \theta - Y
+$$
+LOSS = X \cdot \theta - Y
 =
 \begin{bmatrix}
 x_{1} \cdot \theta \\
@@ -76,7 +83,7 @@ y_1 \\
 \vdots \\
 y_m \\
 \end{bmatrix}
-= 
+=
 \begin{bmatrix}
 loss_0 \\
 loss_1 \\
@@ -85,14 +92,14 @@ loss_m \\
 \end{bmatrix}
 $$
 
-$$ 
-GRADIENT = 
+$$
+GRADIENT =
 \begin{bmatrix}
 \frac{\partial}{\partial\theta_0}J(\theta) \\
 \frac{\partial}{\partial\theta_1}J(\theta) \\
 \vdots \\
 \frac{\partial}{\partial\theta_n}J(\theta) \\
-\end{bmatrix} 
+\end{bmatrix}
 =
 \begin{bmatrix}
 \sum_{i=1}^m(h_\theta(x_i) - y_i)x_{i0} \\
@@ -106,10 +113,10 @@ GRADIENT =
 \sum_{i=1}^mloss_ix_{i1} \\
 \vdots \\
 \sum_{i=1}^mloss_ix_{in} \\
-\end{bmatrix} 
+\end{bmatrix}
 $$
 
-$$ 
+$$
 =
 \begin{bmatrix}
 x_{10} & x_{20} & \cdots & x_{m0} \\
@@ -127,9 +134,10 @@ loss_m \\
 = X^T \cdot LOSS
 $$
 
-#### 完整代码
+## 完整代码
 
 梯度下降实现
+
 ```python
 def gd(X, Y, alpha=0.01, epsilon=1e-6):
     m, n = np.shape(X)
@@ -139,7 +147,7 @@ def gd(X, Y, alpha=0.01, epsilon=1e-6):
     while True:
         hypothesis = np.dot(X, theta)
         loss = hypothesis - Y
-        
+
         sse = np.dot(loss.T, loss) / (2 * m)
         if abs(sse2 - sse) < epsilon:
             break
@@ -152,6 +160,7 @@ def gd(X, Y, alpha=0.01, epsilon=1e-6):
 ```
 
 测试代码
+
 ```python
 X = [(1, 1.), (1, 2.), (1, 3.), (1, 4.), (1, 5.), (1, 6.), (1, 7.), (1, 8.), (1, 9.)]
 Y = [0.199, 0.389, 0.580, 0.783, 0.980, 1.177, 1.380, 1.575, 1.771]
@@ -167,20 +176,18 @@ plt.plot(x, a * x + b, 'r', label='Fitted line')
 plt.show()
 ```
 
-
-#### 启动Notebook
+## 启动Notebook
 
 ```sh
 jupyter notebook
 ```
 
-#### 梯度下降
+## 梯度下降
 
 梯度下降的典型实现方式
 
 ```python
 import numpy as np
-
 
 def bgd(x, y, alpha=0.01, epsilon=1e-8):
     m = len(x)

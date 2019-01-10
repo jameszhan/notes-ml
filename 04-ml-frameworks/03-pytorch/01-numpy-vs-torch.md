@@ -1,6 +1,7 @@
-torch equivalents of numpy functions
+# torch equivalents of numpy functions
 
-### Types
+## Types
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | np.ndarray       | torch.Tensor
@@ -12,8 +13,10 @@ torch equivalents of numpy functions
 | np.int32         | torch.IntTensor
 | np.int64         | torch.LongTensor
 
-### Constructors
-#### Ones and zeros
+## Constructors
+
+### Ones and zeros
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | np.empty([2,2]) | torch.Tensor(2,2)
@@ -25,7 +28,8 @@ torch equivalents of numpy functions
 | np.zeros         | torch.zeros
 | np.zeros_like    | torch.zeros(x:size())
 
-#### From existing data
+### From existing data
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | np.array([ [1,2],[3,4] ])   | torch.Tensor({{1,2},{3,4}})
@@ -40,7 +44,8 @@ torch equivalents of numpy functions
 | np.concatenate | torch.cat
 | np.multiply | torch.cmul
 
-#### Numerical Ranges
+### Numerical Ranges
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | np.arange(10)    | torch.range(0,9)
@@ -48,14 +53,16 @@ torch equivalents of numpy functions
 | np.linspace(1, 4, 6) | torch.linspace(1, 4, 6)
 | np.logspace | torch.logspace
 
-#### Building Matrices
+### Building Matrices
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | np.diag | torch.diag
 | np.tril | torch.tril
 | np.triu | torch.triu
 
-#### Attributes
+### Attributes
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | x.shape | x:size()
@@ -66,11 +73,13 @@ torch equivalents of numpy functions
 | x.size == y.size | x:isSameSizeAs(y)
 | x.dtype | x:type()
 
-#### Indexing
+### Indexing
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 
-#### Shape Manipulation
+### Shape Manipulation
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | x.reshape | x:reshape
@@ -80,7 +89,8 @@ torch equivalents of numpy functions
 | x.flatten   | x:view(x:nElement())
 | x.squeeze   | x:squeeze
 
-#### Item selection and manipulation
+### Item selection and manipulation
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | np.take(a, indices) | a[indices]
@@ -93,15 +103,16 @@ torch equivalents of numpy functions
 | np.argsort | sorted, indices = torch.sort(x, [dim])
 | np.nonzero | torch.find(x:gt(0), 1) (torchx)
 
-#### Calculation
+### Calculation
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | ndarray.min | mins, indices = torch.min(x, [dim])
 | ndarray.argmin | mins, indices = torch.min(x, [dim])
 | ndarray.max | maxs, indices = torch.max(x, [dim])
 | ndarray.argmax | maxs, indices = torch.max(x, [dim])
-| ndarray.clip | 
-| ndarray.round | 
+| ndarray.clip |
+| ndarray.round |
 | ndarray.trace | torch.trace
 | ndarray.sum | torch.sum
 | ndarray.cumsum | torch.cumsum
@@ -113,7 +124,8 @@ torch equivalents of numpy functions
 | ndarray.all | ???
 | ndarray.any | ???
 
-#### Arithmetic and comparison operations
+### Arithmetic and comparison operations
+
 | Numpy            | Torch |
 | --------------------|:-------------:|
 | ndarray.__lt__ | torch.lt

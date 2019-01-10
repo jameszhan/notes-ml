@@ -1,48 +1,85 @@
+# 常见距离函数
+
 #### braycurtis
+
 $$ \sum{|u_i-v_i|} / \sum{|u_i+v_i|} $$
+
 #### canberra
+
 $$ d(u,v) = \sum_i \frac{|u_i-v_i|}{|u_i|+|v_i|} $$
+
 #### chebyshev
+
 $$ \max_i {|u_i-v_i|} $$
+
 #### cityblock
+
 $$ \sum_i {\left| u_i - v_i \right|} $$
+
 #### correlation
+
 $$ 1 - \frac{(u - \bar{u}) \cdot (v - \bar{v})}{{||(u - \bar{u})||}_2 {||(v - \bar{v})||}_2} $$
+
 #### cosine
+
 $$  1 - \frac{u \cdot v}{||u||_2 ||v||_2} $$
+
 #### dice
+
 $$ \frac{c_{TF} + c_{FT}}{2c_{TT} + c_{FT} + c_{TF}} $$
+
 #### euclidean
+
 $$ {||u-v||}_2 $$
 $$ \left(\sum{(w_i |(u_i - v_i)|^2)}\right)^{1/2} $$
-#### hamming
-$$ \frac{c_{01} + c_{10}}{n} $$
-#### jaccard
-$$ \frac{c_{TF} + c_{FT}}{c_{TT} + c_{FT} + c_{TF}} $$
-#### kulsinski
-$$ \frac{c_{TF} + c_{FT} - c_{TT} + n}{c_{FT} + c_{TF} + n} $$
-#### mahalanobis
-$$ \sqrt{ (u-v) V^{-1} (u-v)^T } $$
-#### rogerstanimoto
-$$ \frac{R}{c_{TT} + c_{FF} + R} $$
-#### russellrao
-$$  \frac{n - c_{TT}}{n} $$
-#### sokalmichener
-$$ \frac{R}{S + R} $$
-#### sokalsneath
-$$ \frac{R}{c_{TT} + R} $$
-#### sqeuclidean
-$$ \left(\sum{(w_i |(u_i - v_i)|^2)}\right) $$
-#### wminkowski
-$$  \left(\sum{(|w_i (u_i - v_i)|^p)}\right)^{1/p} $$
-#### yule
-$$  \frac{R}{c_{TT} * c_{FF} + \frac{R}{2}} $$
 
+#### hamming
+
+$$ \frac{c_{01} + c_{10}}{n} $$
+
+#### jaccard
+
+$$ \frac{c_{TF} + c_{FT}}{c_{TT} + c_{FT} + c_{TF}} $$
+
+#### kulsinski
+
+$$ \frac{c_{TF} + c_{FT} - c_{TT} + n}{c_{FT} + c_{TF} + n} $$
+
+#### mahalanobis
+
+$$ \sqrt{ (u-v) V^{-1} (u-v)^T } $$
+
+#### rogerstanimoto
+
+$$ \frac{R}{c_{TT} + c_{FF} + R} $$
+
+#### russellrao
+
+$$  \frac{n - c_{TT}}{n} $$
+
+#### sokalmichener
+
+$$ \frac{R}{S + R} $$
+
+#### sokalsneath
+
+$$ \frac{R}{c_{TT} + R} $$
+
+#### sqeuclidean
+
+$$ \left(\sum{(w_i |(u_i - v_i)|^2)}\right) $$
+
+#### wminkowski
+
+$$  \left(\sum{(|w_i (u_i - v_i)|^p)}\right)^{1/p} $$
+
+#### yule
+
+$$  \frac{R}{c_{TT} * c_{FF} + \frac{R}{2}} $$
 
 $$ D = \left( \sum_{i=1}^n \left|x_i - y_i\right|^p \right)^{1/p} $$
 
 $$ \lim_{p \to \inf} D $$
-
 
 
 DistanceMetric class

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-from gradient_descent import bgd
+from batch_gradient_descent import bgd
 
 
 # define least square estimation function: Y = aX + b

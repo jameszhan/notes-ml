@@ -81,7 +81,7 @@ if __name__ == '__main__':
     plt.grid(True)
     plt.show()
 
-    theta2 = bgd(X, Y, 0.5)
+    theta2 = bgd(X, Y, 0.5, trace=False)
     print('theta = {0}'.format(theta2))
 
     predict2d(theta2, 10, 10)
@@ -100,10 +100,3 @@ if __name__ == '__main__':
     predict2d(theta2, -3, -3)
     predict2d(theta2, -5, -5)
     predict2d(theta2, -10, -10)
-
-
-
-
-
-
-

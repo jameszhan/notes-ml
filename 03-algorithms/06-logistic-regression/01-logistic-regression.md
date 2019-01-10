@@ -1,3 +1,4 @@
+# 逻辑回归损失函数推导
 
 $$ 
 \begin{align}
@@ -7,14 +8,11 @@ log(L(\theta)) &= \sum_{i=1}^m log\left(P(y_i=1|x_i)^{y_i}(1-P(y_i=1|x_i))^{1-y_
 \end{align}
 $$
 
-
 $ P(Y=1|x) = \frac{1}{1 + e^{-z}}$ 
-
 
 其中 $z = \theta^Tx  $
 
-
-$$ 
+$$
 \begin{align}
 & P(y=1|x;\theta) = h_{\theta}(x) \\
 & P(y=0|x;\theta) = 1 - h_{\theta}(x) \\
@@ -25,7 +23,7 @@ $$
 
 #### 逻辑回归损失函数导数
 
-$$ 
+$$
 \begin{align}
 J(\theta) &= \frac{1}{m}\sum_{i=1}^m Cost\left(h_{\theta}\left(x^{(i)}\right),y^{(i)}\right) \\
 &= -\frac{1}{m}[\sum_{i=1}^m y^{(i)}\log h_{\theta}\left(x^{(i)}\right) 
@@ -50,11 +48,9 @@ y^{(i)} \frac{h_{\theta}^{'}\left(x^{(i)}\right)}{h_{\theta}\left(x^{(i)}\right)
 \end{align}
 $$
 
-
 #### $\ln x$ 导数的推导
 
-
-$$ 
+$$
 \begin{align}
 \frac{d}{dx}\ln x &= \lim_{h \to 0} \frac{\ln(x + h) - \ln(x)}{h} \\
 &= \lim_{h \to 0} \frac{\ln\left(\frac{x + h}{x}\right)}{h} \\
@@ -64,7 +60,6 @@ $$
 &= \frac{1}{x} \cdot \lim_{h \to 0} \ln\left(1 + \frac{h}{x}\right)^{\frac{x}{h}} \\ 
 \end{align}
 $$
-
 
 因为：
 
@@ -76,7 +71,6 @@ $$ \frac{d}{dx}\ln x
 = \frac{1}{x} \cdot \ln\left(\lim_{\frac{h}{x} \to 0} \left(1 + \frac{h}{x}\right)^{\frac{x}{h}}\right)
 = \frac{1}{x} \cdot \ln e
 = \frac{1}{x} $$
-
 
 设$V_n,U_m$分别是$n,m$维的线性空间，如果一个从$V_n$ 到$U_m$的映射T满足
 
