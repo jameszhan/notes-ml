@@ -3,7 +3,7 @@ import re
 
 
 def to_human(num):
-    p = re.compile('(?<=\d)(?=(\d{3})+$)')
+    p = re.compile(r'(?<=\d)(?=(\d{3})+$)')
     return p.sub(',', str(num))
 
 
