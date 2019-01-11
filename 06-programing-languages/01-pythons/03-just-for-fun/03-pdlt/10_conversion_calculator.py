@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def eval(e):
     if type(e) == type(1): return (e, {})  # <--- (e,{})    common mistake: e
     if type(e) == type(1.1): return (e, {})  # <--- (e,{})    common mistake: e

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def y_combinator(gen):
     return (lambda g: g(g))(lambda f: gen(lambda *args: f(f)(*args)))
 

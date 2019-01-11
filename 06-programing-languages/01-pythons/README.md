@@ -2,6 +2,22 @@
 
 ## Anaconda
 
+### 安装 Anaconda
+
+#### OS X 环境安装
+
+```bash
+wget https://repo.continuum.io/archive/Anaconda3-2018.12-MacOSX-x86_64.sh
+bash ./Anaconda3-2018.12-MacOSX-x86_64.sh
+```
+
+#### Linux 环境安装
+
+```bash
+wget https://repo.continuum.io/archive/Anaconda3-2018.12-Linux-x86_64.sh
+bash ./Anaconda3-2018.12-Linux-x86_64.sh
+```
+
 ### 配置 Anaconda 环境
 
 ```bash
@@ -18,11 +34,9 @@ conda env list
 ### 切换 Python 版本
 
 ```bash
-conda create -n python2 python=2 scikit-learn
-conda install numpy scipy sympy matplotlib -n python2
-
-source activate python2
+conda create -n py2 python=2
+source activate py2
 conda list
-python -c 'import sys; print(sys.version)'
-source deactivate python2
+python -c 'import sys; print sys.version'
+source deactivate py2
 ```
