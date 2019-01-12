@@ -45,7 +45,9 @@ pip install --upgrade pip
 #### 安装指定版本
 
 ```bash
+# 列出 pypi 上所有可用的版本
 ../../../06-programing-languages/01-pythons/03-just-for-fun/01-systems/pypi_versions tensorflow
+
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -U tensorflow==1.8.0
 pip check
 conda list

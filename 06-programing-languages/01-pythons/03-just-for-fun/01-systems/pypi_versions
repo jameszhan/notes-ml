@@ -1,20 +1,30 @@
 #!/usr/bin/env python
-
 import sys
 import json
 from urllib.request import urlopen
 
-if len(sys.argv) != 2:
+argslen = len(sys.argv)
+if argslen < 2:
     print("pypi_versions <package>")
 else:
-    try: 
-        response = urlopen("https://pypi.org/pypi/{0}/json".format(sys.argv[1]))
+    try:
+        response = urlopen("https://pypi.org/pypi/{}/json".format(sys.argv[1]))
         str = response.read().decode('UTF-8')
         descriptor = json.loads(str)
         releases = descriptor['releases']
-        versions = {}
         for k, v in releases.items():
             pythons = set(map(lambda o: o['python_version'], v))
-            print("{0}   \t{1}".format(k, sorted(pythons)))
+            print("{0:8}\t{1}".format(k + ":", sorted(pythons)))
+
+        varg = sys.argv[2].strip()
+        if argslen > 2 and (varg == '-v' or varg == '--verbose'):
+            info = descriptor['info']
+            if info:
+                print("{0:10}{1}".format("\nName: ", info['name']))
+                print("{0:10}{1}".format("Summary: ", info['summary']))
+                print("{0:10}{1}".format("Author: ", info['author']))
+                print("{0:10}{1}".format("Homepage: ", info['home_page']))
+                print("{0:10}{1}".format("Description: ", info['description'].replace("\n", "")))
+
     except OSError:
         print("{} Not Found".format(sys.argv[1]))
