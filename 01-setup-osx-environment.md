@@ -1,0 +1,484 @@
+# 打造 OS X 开发环境
+
+版本号 | 修订日期 | 修订概述 | 修订人 | 备注
+----- | ------ | ------- | ----- | -----
+v0.0.1 | 2019-01-13 | Setup a new Mac | James Zhan |
+
+## 准备工作
+
+### 安装必要软件
+
+#### 安装 Xcode
+
+从 App Store 上搜索 Xcode 并安装到本地。
+
+#### 安装 Homebrew
+
+官方地址： [Homebrew](https://brew.sh/)
+
+一键安装
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+测试是否安装成功
+
+```bash
+brew --version
+brew --help
+```
+
+试着安装软件
+
+```bash
+brew install wget
+```
+
+## 通过 Homebrew 安装软件
+
+### 安装 App
+
+#### Alfred
+
+```bash
+brew cask info alfred
+brew cask install alfred
+```
+
+#### iTerm2
+
+```bash
+brew cask info iterm2
+brew cask install iterm2
+```
+
+#### Visual Studio Code
+
+```bash
+brew cask info visual-studio-code
+brew cask install visual-studio-code
+alias vscode="open -b com.microsoft.VSCode"
+```
+
+#### Google Chrome
+
+```bash
+brew cask info google-chrome
+brew cask install google-chrome
+```
+
+#### Docker
+
+```bash
+brew cask info docker
+brew cask install docker
+```
+
+#### Sublime Text 3
+
+```bash
+brew cask info sublime-text
+brew cask install sublime-text
+```
+
+#### 搜狗输入法
+
+```bash
+brew cask info sogouinput
+brew cask install sogouinput
+open /usr/local/Caskroom/sogouinput/<VERSION>/sogou_mac_<NUM>.app
+```
+
+#### kdiff3
+
+```bash
+brew cask info kdiff3
+brew cask install kdiff3
+```
+
+#### Typora
+
+```bash
+brew cask info typora
+brew cask install typora
+alias typora="open -a typora"
+```
+
+### 安装数据库服务
+
+#### PostgreSQL
+
+```bash
+brew info postgresql
+brew install postgresql
+```
+
+#### MySQL
+
+```bash
+brew info mysql
+brew install mysql
+```
+
+#### MongoDB
+
+```bash
+brew info mongodb
+brew install mongodb
+```
+
+#### Redis
+
+```bash
+brew info redis
+brew install redis
+```
+
+#### SQLite
+
+```bash
+brew info sqlite
+brew install sqlite
+```
+
+## 配置开发环境
+
+### 开发环境准备
+
+#### 配置工作目录
+
+```bash
+sudo mkdir /james
+sudo chown -R james:staff /james
+cd /james
+mkidr workdir
+cd workdir
+```
+
+#### 配置 GitHub 访问权限
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "zhiqiangzhan@gmail.com"
+ls -la ~/.ssh
+
+eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_rsa
+
+pbcopy < ~/.ssh/id_rsa.pub
+```
+
+添加这个 key 到 `GitHub Settings` / `SSH and GPG keys` / `New SSH key`
+
+```
+ssh -T git@github.com
+```
+
+#### 配置 ZSH
+
+```bash
+git clone https://github.com/jameszhan/oh-my-zsh.git ~/.oh-my-zsh
+
+cd ~/.oh-my-zsh
+git remote add upstream https://github.com/robbyrussell/oh-my-zsh.git
+git fetch upstream
+git checkout master
+
+cp ~/.zshrc ~/.zshrc.orig
+cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+chsh -s /bin/zsh
+```
+
+编辑 ~/.zshrc 个性化你的配置
+
+```bash
+ZSH_THEME="jameszhan"
+plugins=(git svn mvn brew gem go lein npm node rails ruby rvm)
+```
+
+### 准备 Ruby 开发环境
+
+#### 安装 GPG
+
+```bash
+brew info gpg
+brew install gpg
+
+gpg --gen-key
+gpg --list-secret-keys --keyid-format LONG
+# gpg: checking the trustdb
+# gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+# gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+# gpg: next trustdb check due at 2021-01-13
+# /Users/james/.gnupg/pubring.kbx
+# -------------------------------
+# sec   rsa2048/AAAAAAAAAAAAAAA 2019-01-14 [SC] [expires: 2021-01-13]
+#       AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+# uid                 [ultimate] James Zhan <zhiqiangzhan@gmail.com>
+# ssb   rsa2048/AAAAAAAAAAAAAAA 2019-01-14 [E] [expires: 2021-01-13]
+git config --global user.signingkey AAAAAAAAAAAAAAA
+```
+
+#### 安装 RVM
+
+```bash
+# gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+gpg --keyserver pgp.ocf.berkeley.edu --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+\curl -sSL https://get.rvm.io | sudo bash -s stable
+
+sudo chown -R james:rvm /usr/local/rvm
+rvm reload
+```
+
+#### 安装 Ruby
+
+```bash
+rvm list known
+rvm install 2.6
+
+rvm use 2.6 --default
+
+ruby --version
+
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+gem sources -l
+
+gem update --verbose
+gem install bundler pry jekyll
+```
+
+#### 更新 RVM
+
+```bash
+rvmsudo rvm get stable
+sudo chown -R james:rvm /usr/local/rvm
+rvm reload
+```
+
+### 准备 Python 开发环境
+
+#### 安装 Anaconda
+
+```bash
+wget https://repo.continuum.io/archive/Anaconda3-2018.12-MacOSX-x86_64.sh
+bash ./Anaconda3-2018.12-MacOSX-x86_64.sh
+```
+
+#### 更新和配置 conda
+
+```bash
+conda update -n base conda
+conda update -n base anaconda
+conda update -n base --all
+
+conda config --set show_channel_urls yes
+```
+
+#### 安装不同版本的 Python
+
+```bash
+conda create -n py2 python=2
+source activate py2
+conda list
+python -c 'import sys; print sys.version'
+source deactivate py2
+```
+
+#### 安装 TensorFlow
+
+```bash
+conda create -n tf -y python=3.6
+conda install -n tf -c conda-forge tensorflow
+source activate tf
+conda list
+python -c "import tensorflow as tf; print(tf.__version__)"
+```
+
+### 准备 Java 开发环境
+
+#### 安装 Java
+
+从 [Oracle 官网](https://www.oracle.com/technetwork/java/javase/downloads/index.html)上下载 JDK 安装包，并安装到本地。
+
+如果有安装多个版本，可以通过如下命令来切换版本。
+
+```bash
+# export JAVA_HOME=$(/usr/libexec/java_home -version 1.6)
+# export JAVA_HOME=$(/usr/libexec/java_home -version 1.7)
+export JAVA_HOME=$(/usr/libexec/java_home -version 1.8)
+```
+
+#### 安装 JVM 其他语言
+
+```bash
+# Kotlin
+brew install kotlin
+# Groovy
+brew install groovy
+# Clojure
+brew install leiningen
+# Scala
+brew install scala
+```
+
+#### Build Tool
+
+```bash
+brew install maven
+brew install gradle
+brew install neo4j
+```
+
+#### 其他工具集
+
+```bash
+brew install zookeeper
+brew install elasticsearch
+```
+
+### 玩转编程语言
+
+#### JavaScript
+
+```bash
+brew install node --enable-debug
+```
+
+#### Go 语言
+
+```bash
+brew info go
+brew install go
+```
+
+#### Common Lisp
+
+```bash
+brew info clisp
+brew install clisp
+```
+
+#### Scheme
+
+```bash
+brew info mit-scheme
+brew install mit-scheme
+```
+
+#### NewLISP
+
+```bash
+brew info newlisp
+brew install newlisp
+```
+
+#### Lua
+
+```bash
+brew info lua
+brew install lua
+```
+
+#### Smalltalk
+
+```bash
+brew info gnu-smalltalk
+brew install gnu-smalltalk --tcltk
+```
+
+#### Io 语言
+
+```bash
+brew info io
+brew install io
+```
+
+#### Erlang
+
+```bash
+brew info erlang
+brew install erlang
+```
+
+#### Prolog
+
+```bash
+brew info swi-prolog
+brew install swi-prolog --with-jpl --with-xpce
+```
+
+## 其他工具
+
+### 经典编辑器
+
+#### Vim
+
+```bash
+brew cask install macvim
+```
+
+#### Emacs
+
+```bash
+brew cask install emacs
+```
+
+### 多媒体软件
+
+#### ffmpeg
+
+在Windows下，我们有很多视频格式转换的工具，尽管良莠不齐，但是只要有耐心，总是可以达到转换的要求，在OS X下，App Store上也可以找到一些转码工具，但是一般都价格不菲。事实上，绝大部分视频转码工具底层都用到了FFmpeg，而FFmpeg是完全开源和免费的，既然如此，我们为何不直接使用ffmpeg来进行视音频的转码处理呢。
+
+```bash
+# 查看ffmpeg的安装选项，可以按照你自己的要求选装
+brew info ffmpeg
+
+# 安装FFmpeg
+brew install ffmpeg --with-fdk-aac --without-faac
+
+#列出支持的编解码器
+ffmpeg -codecs
+
+#列出支持的滤镜
+ffmpeg -filters
+ 
+#列出支持的格式
+ffmpeg -formats
+```
+
+> 注：FFmpeg是一个开源免费跨平台的视频和音频流方案，属于自由软件，采用LGPL或GPL许可证（依据你选择的组件）。它提供了录制、转换以及流化音视频的完整解决方案。
+
+#### VLC
+
+OS X 下免费又好用的视频播放器当属 VLC，可以支持几乎所有常用的视频格式。
+
+```bash
+brew cask info vlc
+brew cask install vlc
+```
+
+### 虚拟软件
+
+#### QEMU
+
+QEMU是一套由Fabrice Bellard所编写的以GPL许可证分发源码的模拟处理器，在GNU/Linux平台上使用广泛。
+
+```bash
+brew info qemu
+brew install qemu --with-libssh2 --with-sdl --with-vde
+```
+
+#### Bochs
+
+Bochs 是一个基于LGPL的开源x86 虚拟机软件（类似于QEMU）。Bochs 的 CPU 指令是完全自己模拟出来的，这种方式的缺点是速度比较慢；优点是具有无以伦比的可移植性：有 gcc 的地方就可以有 Bochs。甚至已经有了跑在 PocketPC 上的 Bochs。
+
+```bash
+brew info bochs
+brew install bochs
+```
+
+### 效率工具
+
+```bash
+brew install tree rename 
+```
