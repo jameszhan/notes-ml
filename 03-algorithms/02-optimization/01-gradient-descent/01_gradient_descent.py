@@ -3,7 +3,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def gd(X, Y, alpha=0.01, epsilon=1e-6):
     m, n = np.shape(X)
     theta = np.ones(n)
