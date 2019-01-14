@@ -156,6 +156,18 @@ mkidr workdir
 cd workdir
 ```
 
+#### 配置 Git
+
+```bash
+git config user.name "James Zhan"
+git config user.email "zhiqiangzhan@gmail.com"
+git commit --amend --reset-author
+
+git config --global core.editor subl
+git config --global user.name "James Zhan"
+git config --global user.email "zhiqiangzhan@gmail.com"
+```
+
 #### 配置 GitHub 访问权限
 
 ```bash
