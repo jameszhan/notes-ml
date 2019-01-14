@@ -16,9 +16,10 @@ conda update -n base --all
 
 ```bash
 conda create -n tf -y python=3.6
+conda install -n tf -c conda-forge tensorflow
+
 source activate tf
 
-conda install -n base -c conda-forge tensorflow
 conda list
 python -c "import tensorflow as tf; print(tf.__version__)"
 ```
