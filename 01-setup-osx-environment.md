@@ -158,14 +158,42 @@ cd workdir
 
 #### 配置 Git
 
+安装最新版本的 git
+
+```bash
+brew install git
+brew install git-lfs
+```
+
+配置你的 git 项目
+
 ```bash
 git config user.name "James Zhan"
 git config user.email "zhiqiangzhan@gmail.com"
 git commit --amend --reset-author
+```
+git 全局配置
 
+```
 git config --global core.editor subl
 git config --global user.name "James Zhan"
 git config --global user.email "zhiqiangzhan@gmail.com"
+```
+
+配置 Git LFS
+
+```bash
+git lfs install
+
+git lfs track "*.csv"
+git lfs track "*.zip"
+git lfs track "*.tar.gz"
+git lfs track "*.dat"
+git lfs track "*.mat"
+
+git lfs track
+
+git lfs ls-files
 ```
 
 #### 配置 GitHub 访问权限
