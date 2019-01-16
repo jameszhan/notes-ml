@@ -320,6 +320,10 @@ python -c "import tensorflow as tf; print(tf.__version__)"
 export JAVA_HOME=$(/usr/libexec/java_home -version 1.8)
 ```
 
+#### 安装 IntelliJ IDEA
+
+可以从 [JetBrains 官网下载](https://www.jetbrains.com/idea/download/#section=mac)下载。
+
 #### 安装 JVM 其他语言
 
 ```bash
