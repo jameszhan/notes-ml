@@ -6,7 +6,7 @@ import itertools
 
 logger = logging.getLogger("unittestLogger")
 
-class TestPythonTrick(unittest.TestCase):
+class TestItertools(unittest.TestCase):
 
     def test_product(self):
         arrays = itertools.product(['a', 'b', 'c'], [1, 2], ['x', 'y'])

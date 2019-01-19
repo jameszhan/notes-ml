@@ -5,7 +5,7 @@ import unittest
 
 logger = logging.getLogger("unittestLogger")
 
-class TestPythonTrick(unittest.TestCase):
+class TestCollections(unittest.TestCase):
 
     def test_counter(self):
         from collections import Counter
