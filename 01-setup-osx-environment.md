@@ -762,7 +762,7 @@ brew install graphviz --with-app --with-librsvg
 #### PlantUML
 
 ```bash
-
+brew install plantuml
 ```
 
 #### ffmpeg
