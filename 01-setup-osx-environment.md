@@ -4,6 +4,7 @@
 ----- | ------ | ------- | ----- | -----
 v0.0.1 | 2019-01-13 | Setup a new Mac | James Zhan |
 v0.0.2 | 2019-01-20 | Merge notes-history/HOMEBREW.md | James Zhan |
+v0.0.3 | 2019-01-22 | Add 画图工具 | James Zhan |
 
 
 ## 准备工作
@@ -65,6 +66,21 @@ brew install wget
 
 ### 安装 App
 
+#### Google Chrome
+
+```bash
+brew cask info google-chrome
+brew cask install google-chrome
+```
+
+#### 搜狗输入法
+
+```bash
+brew cask info sogouinput
+brew cask install sogouinput
+open /usr/local/Caskroom/sogouinput/<VERSION>/sogou_mac_<NUM>.app
+```
+
 #### Alfred
 
 ```bash
@@ -79,26 +95,19 @@ brew cask info iterm2
 brew cask install iterm2
 ```
 
+#### Docker
+
+```bash
+brew cask info docker
+brew cask install docker
+```
+
 #### Visual Studio Code
 
 ```bash
 brew cask info visual-studio-code
 brew cask install visual-studio-code
 alias vscode="open -b com.microsoft.VSCode"
-```
-
-#### Google Chrome
-
-```bash
-brew cask info google-chrome
-brew cask install google-chrome
-```
-
-#### Docker
-
-```bash
-brew cask info docker
-brew cask install docker
 ```
 
 #### Sublime Text 3
@@ -108,12 +117,12 @@ brew cask info sublime-text
 brew cask install sublime-text
 ```
 
-#### 搜狗输入法
+#### Typora
 
 ```bash
-brew cask info sogouinput
-brew cask install sogouinput
-open /usr/local/Caskroom/sogouinput/<VERSION>/sogou_mac_<NUM>.app
+brew cask info typora
+brew cask install typora
+alias typora="open -a typora"
 ```
 
 #### kdiff3
@@ -121,14 +130,6 @@ open /usr/local/Caskroom/sogouinput/<VERSION>/sogou_mac_<NUM>.app
 ```bash
 brew cask info kdiff3
 brew cask install kdiff3
-```
-
-#### Typora
-
-```bash
-brew cask info typora
-brew cask install typora
-alias typora="open -a typora"
 ```
 
 ## 配置开发环境
@@ -736,6 +737,34 @@ brew cask install emacs
 
 ### 多媒体软件
 
+#### graphviz
+
+`graphviz`是贝尔实验室开发的一个开源的工具包，它使用 特有的 DSL 作为脚本语言，然后使用布局引擎来解析此脚本，并完成自动布局。`graphviz`提供丰富的导出格式。
+
+graphviz中包含了众多的布局器：
+
+- dot - filter for drawing directed graphs（有向图）
+- neato - filter for drawing undirected graphs（基于 force-based 算法）
+- twopi - filter for radial layouts of graphs（径向布局）
+- circo - filter for circular layout of graphs（圆环布局）
+- fdp - filter for drawing undirected graphs（无向图）
+- sfdp - filter for drawing large undirected graphs
+- patchwork - filter for squarified tree maps
+- osage - filter for array-based layouts
+
+Graph visualization software from AT&T and Bell Labs
+- https://www.graphviz.org/
+
+```bash
+brew install graphviz --with-app --with-librsvg
+```
+
+#### PlantUML
+
+```bash
+
+```
+
 #### ffmpeg
 
 在Windows下，我们有很多视频格式转换的工具，尽管良莠不齐，但是只要有耐心，总是可以达到转换的要求，在OS X下，App Store上也可以找到一些转码工具，但是一般都价格不菲。事实上，绝大部分视频转码工具底层都用到了FFmpeg，而FFmpeg是完全开源和免费的，既然如此，我们为何不直接使用ffmpeg来进行视音频的转码处理呢。
@@ -845,11 +874,6 @@ Edit preview images and fix bounding boxes in EPS files
 
 GNU Pretty Good Privacy (PGP) package
 - https://gnupg.org/
-
-#### graphviz
-
-Graph visualization software from AT&T and Bell Labs
-- https://www.graphviz.org/
 
 #### pstree
 
