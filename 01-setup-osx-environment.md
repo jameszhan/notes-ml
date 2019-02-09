@@ -15,7 +15,7 @@ v0.0.3 | 2019-01-22 | Add 画图工具 | James Zhan |
 
 从 App Store 上搜索 Xcode 并安装到本地。
 
-#### 安装 Homebrew
+#### 安装 Homebrew
 
 官方地址： [Homebrew](https://brew.sh/)
 
@@ -448,6 +448,13 @@ Netwide Assembler (NASM) is an 80x86 assembler
 ```bash
 brew info nasm
 brew install nasm
+```
+
+#### Julia
+
+```bash
+brew cask info julia
+brew cask install julia
 ```
 
 #### Common Lisp
